@@ -45,7 +45,6 @@ public class MainModule extends AbstractModule {
         }
     };
 
-    public static final Block IRON_MUSHROOM = new ModBlock(blockProp(new MushroomBlock(blockProp(Material.ORGANIC))));
     public static final Item IRON_MUSHROOM_STEW = new ModItem(new Item.Properties().rarity(Rarity.COMMON));
     public static final Item CONCENTRATED_MUSHROOM_STEW = new ModItem(new Item.Properties().rarity(Rarity.COMMON));
 

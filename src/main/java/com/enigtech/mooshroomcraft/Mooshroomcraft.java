@@ -18,6 +18,7 @@ import org.apache.logging.log4j.Logger;
 @Mod("mooshroomcraft")
 public class Mooshroomcraft {
     public static final String MOD_ID = "mooshroomcraft";
+    public static final String MOD_NAME = "Mooshroomcraft";
     public static final Logger LOGGER = LogManager.getLogger();
 
     public Mooshroomcraft(){
