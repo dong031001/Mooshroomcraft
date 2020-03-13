@@ -1,7 +1,9 @@
 {
-    "entity.mooshroomcraft.iron_mooshroom" : "Iron Mooshroom",
     "item.mooshroomcraft.moosher" : "Moosher",
     "item.mooshroomcraft.concentrated_mushroom_stew" : "Concentrated Mushroom Stew",
+    "item.mooshroomcraft.iron_mushroom" : "Iron Mushroom",
     "item.mooshroomcraft.iron_mushroom_stew" : "Iron Mushroom Stew",
+    "item.mooshroomcraft.iron_moosher" : "Iron Moosher",
+    "entity.mooshroomcraft.iron_mooshroom" : "Iron Mooshroom",
     "item.mooshroomcraft.iron_mooshroom_spawn_egg" : "Iron Mooshroom Spawn Egg"
 }

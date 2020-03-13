@@ -7,6 +7,7 @@ import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.SuspiciousStewItem;
@@ -22,9 +23,11 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class EntityIronMooshroom extends MooshroomEntity {
 
+    Item mushroom;
+    Item mushroomStew;
+
     public EntityIronMooshroom(EntityType<? extends MooshroomEntity> type, World worldIn) {
         super(type, worldIn);
-
     }
 
     @Override
@@ -38,7 +41,7 @@ public class EntityIronMooshroom extends MooshroomEntity {
             if(!player.abilities.isCreativeMode){
                 itemstack.shrink(1);
             }
-            ItemStack itemstack1 = new ItemStack(MainModule.IRON_MUSHROOM_STEW);
+            ItemStack itemstack1 = new ItemStack(mushroomStew);
             if (itemstack.isEmpty()) {
                 player.setHeldItem(hand, itemstack1);
             } else if (!player.inventory.addItemStackToInventory(itemstack1)) {

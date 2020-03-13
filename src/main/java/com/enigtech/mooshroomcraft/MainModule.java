@@ -24,38 +24,24 @@ import snownee.kiwi.block.ModBlock;
 import snownee.kiwi.item.ModItem;
 import com.enigtech.mooshroomcraft.entity.EntityRegistry;
 
+import java.io.File;
+import java.io.IOException;
+
 @KiwiModule
 public class MainModule extends AbstractModule {
-
-    public static final Item MOOSHER = new ModItem(new Item.Properties().rarity(Rarity.EPIC)){
-        @Override
-        public boolean itemInteractionForEntity(ItemStack stack, PlayerEntity playerIn, LivingEntity target, Hand hand) {
-            if(target instanceof CowEntity&&!(target instanceof MooshroomEntity)&&(!playerIn.world.isRemote)){
-                if(!target.isChild()){
-                    EntityIronMooshroom mooshroom = EntityRegistry.IRON_MOOSHROOM.create(playerIn.world);
-                    mooshroom.copyLocationAndAnglesFrom(target);
-                    target.remove();
-                    mooshroom.setNoAI(((CowEntity) target).isAIDisabled());
-                    playerIn.world.addEntity(mooshroom);
-                    stack.shrink(1);
-                    return true;
-                }
-            }
-            return super.itemInteractionForEntity(stack, playerIn, target, hand);
-        }
-    };
-
-    public static final Item IRON_MUSHROOM_STEW = new ModItem(new Item.Properties().rarity(Rarity.COMMON));
-    public static final Item CONCENTRATED_MUSHROOM_STEW = new ModItem(new Item.Properties().rarity(Rarity.COMMON));
 
     @Override
     @OnlyIn(Dist.CLIENT)
     protected void clientInit(FMLClientSetupEvent event) {
-        RenderingRegistry.registerEntityRenderingHandler(EntityRegistry.IRON_MOOSHROOM, MooshroomRenderer::new);
+        //RenderingRegistry.registerEntityRenderingHandler(EntityRegistry.IRON_MOOSHROOM, MooshroomRenderer::new);
     }
 
     @Override
     protected void serverInit(FMLServerStartingEvent event) {
-        //TODO
+    }
+
+    @Override
+    protected void preInit(){
+        IConfigHandler.init();
     }
 }

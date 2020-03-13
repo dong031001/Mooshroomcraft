@@ -24,7 +24,7 @@ public class EntityRegistry {
     private static List<EntityType> entityTypeList = new ArrayList<>();
     private static List<Item> spawnEggList = new ArrayList<>();
 
-    public final static EntityType<EntityIronMooshroom> IRON_MOOSHROOM = create("iron_mooshroom", EntityIronMooshroom::new, 0.9F, 1.4F, 0x000000, 0xFFFFFF);
+    //public final static EntityType<EntityIronMooshroom> IRON_MOOSHROOM = create("iron_mooshroom", EntityIronMooshroom::new, 0.9F, 1.4F, 0x000000, 0xFFFFFF);
 
     private static <T extends LivingEntity> EntityType<T> create(String registryName, EntityType.IFactory<T> factory, float width, float height, int eggPrimary, int eggSecondary) {
 

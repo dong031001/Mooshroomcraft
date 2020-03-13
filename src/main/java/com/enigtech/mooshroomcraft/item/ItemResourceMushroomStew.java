@@ -1,4 +1,9 @@
 package com.enigtech.mooshroomcraft.item;
 
-public class ItemResourceMushroomStew {
+import net.minecraft.item.Item;
+
+public class ItemResourceMushroomStew extends ColoredItem {
+    public ItemResourceMushroomStew(int color) {
+        super(color);
+    }
 }

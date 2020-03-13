@@ -14,6 +14,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.message.MessageFactory;
 
 @Mod("mooshroomcraft")
 public class Mooshroomcraft {
@@ -23,5 +24,9 @@ public class Mooshroomcraft {
 
     public Mooshroomcraft(){
         final IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+    }
+
+    public static void logInfo(Object object){
+        LOGGER.info(object);
     }
 }
