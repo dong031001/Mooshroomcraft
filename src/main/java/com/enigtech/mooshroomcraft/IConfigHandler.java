@@ -1,5 +1,6 @@
 package com.enigtech.mooshroomcraft;
 
+import com.enigtech.mooshroomcraft.entity.EntityResourceMooshroom;
 import com.enigtech.mooshroomcraft.item.ColoredItem;
 import com.enigtech.mooshroomcraft.item.ItemMoosher;
 import net.minecraft.block.Block;
@@ -42,8 +43,8 @@ public class IConfigHandler {
         return resourceMap.get(name).mushroomStew;
     }
 
-    public static EntityType getMooshroom(String name){
-        return resourceMap.get(name).mooshroom;
+    public static EntityType<EntityResourceMooshroom> getMooshroom(String name){
+        return resourceMap.get(name).mooshroomEntityType;
     }
 
     public static Block getMushroomBlock(String name){ return resourceMap.get(name).mushroomBlock;}

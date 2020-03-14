@@ -1,9 +1,5 @@
 package com.enigtech.mooshroomcraft.item;
 
-import com.enigtech.mooshroomcraft.entity.EntityIronMooshroom;
-import com.enigtech.mooshroomcraft.entity.EntityRegistry;
-import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

@@ -1,33 +1,26 @@
 package com.enigtech.mooshroomcraft.entity;
 
-import com.enigtech.mooshroomcraft.MainModule;
-import net.minecraft.entity.Entity;
+import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.SuspiciousStewItem;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.Effect;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Hand;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
-import org.apache.commons.lang3.tuple.Pair;
 
-public class EntityIronMooshroom extends MooshroomEntity {
+public class EntityResourceMooshroom extends MooshroomEntity {
 
-    Item mushroom;
+    Block mushroom;
     Item mushroomStew;
 
-    public EntityIronMooshroom(EntityType<? extends MooshroomEntity> type, World worldIn) {
+    public EntityResourceMooshroom(EntityType<? extends MooshroomEntity> type, World worldIn, Item mushroomStew, Block mushroom) {
         super(type, worldIn);
+        this.mushroom = mushroom;
+        this.mushroomStew = mushroomStew;
     }
 
     @Override

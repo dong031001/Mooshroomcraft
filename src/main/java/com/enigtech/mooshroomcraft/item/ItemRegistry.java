@@ -17,6 +17,7 @@ public class ItemRegistry {
     public static void registerItems(final RegistryEvent.Register<Item> event) {
         for(String resourceName: IConfigHandler.getResourceNames()){
             event.getRegistry().register(IConfigHandler.getMushroomStew(resourceName));
+            event.getRegistry().register(IConfigHandler.getMushroom(resourceName));
         }
     }
 }

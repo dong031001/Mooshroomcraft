@@ -11,10 +11,10 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = Mooshroomcraft.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class BlockRegistry {
     @SubscribeEvent
-    public void onBlockRegister(RegistryEvent.Register<Block> event){
+    public static void onBlockRegister(RegistryEvent.Register<Block> event){
         for(String resourceName : IConfigHandler.getResourceNames()){
             Block block = IConfigHandler.getMushroomBlock(resourceName);
-            event.getRegistry().register(block.setRegistryName(Mooshroomcraft.MOD_ID, "mushroom_"+resourceName));
+            event.getRegistry().register(block);
         }
     }
 }

@@ -1,4 +1,10 @@
 package com.enigtech.mooshroomcraft.render.entity;
 
-public class RendererResourceMooshroom {
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.MooshroomRenderer;
+
+public class RendererResourceMooshroom extends MooshroomRenderer {
+    public RendererResourceMooshroom(EntityRendererManager renderManagerIn) {
+        super(renderManagerIn);
+    }
 }

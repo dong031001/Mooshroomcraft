@@ -1,6 +1,7 @@
 package com.enigtech.mooshroomcraft;
 
 import com.enigtech.mooshroomcraft.entity.EntityRegistry;
+import com.enigtech.mooshroomcraft.render.EntityRenderRegistry;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.renderer.entity.MooshroomRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -24,6 +25,7 @@ public class Mooshroomcraft {
 
     public Mooshroomcraft(){
         final IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        eventBus.addListener(EntityRenderRegistry::clientInit);
     }
 
     public static void logInfo(Object object){

@@ -2,10 +2,7 @@ package com.enigtech.mooshroomcraft.entity;
 
 import com.enigtech.mooshroomcraft.Mooshroomcraft;
 import com.google.common.base.Preconditions;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntitySpawnPlacementRegistry;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SpawnEggItem;
@@ -21,16 +18,16 @@ import java.util.List;
 @Mod.EventBusSubscriber(modid = Mooshroomcraft.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EntityRegistry {
 
-    private static List<EntityType> entityTypeList = new ArrayList<>();
+    private static List<EntityType<? extends Entity>> entityTypeList = new ArrayList<>();
     private static List<Item> spawnEggList = new ArrayList<>();
 
     //public final static EntityType<EntityIronMooshroom> IRON_MOOSHROOM = create("iron_mooshroom", EntityIronMooshroom::new, 0.9F, 1.4F, 0x000000, 0xFFFFFF);
 
-    private static <T extends LivingEntity> EntityType<T> create(String registryName, EntityType.IFactory<T> factory, float width, float height, int eggPrimary, int eggSecondary) {
+    public static EntityType<EntityResourceMooshroom> createEntityType(String registryName, EntityType.IFactory<EntityResourceMooshroom> factory, float width, float height, int eggPrimary, int eggSecondary) {
 
         ResourceLocation location = new ResourceLocation(Mooshroomcraft.MOD_ID, registryName);
 
-        EntityType<T> entity = EntityType.Builder.create(factory, EntityClassification.CREATURE)
+        EntityType<EntityResourceMooshroom> entity = EntityType.Builder.create(factory, EntityClassification.CREATURE)
                 .size(width, height)
                 .setTrackingRange(64)
                 .setUpdateInterval(1)
@@ -48,7 +45,7 @@ public class EntityRegistry {
 
     @SubscribeEvent
     public static void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
-        for (EntityType entity : entityTypeList) event.getRegistry().register(entity);
+        for (EntityType<? extends Entity> entity : entityTypeList) event.getRegistry().register(entity);
     }
 
     @SubscribeEvent

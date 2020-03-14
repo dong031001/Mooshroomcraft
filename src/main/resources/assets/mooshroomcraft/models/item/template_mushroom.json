@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "mooshroomcraft:blocks/mushroom_base",
+    "layer1": "mooshroomcraft:blocks/mushroom_overlay"
+  }
+}
