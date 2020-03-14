@@ -1,0 +1,10 @@
+{
+  "type": "smelting",
+  "ingredient": {
+    "item": "mooshroomcraft:mushroom_stew_iron"
+  },
+  "result": {
+    "item" : "minecraft:iron_nugget",
+    "count" : 3
+  }
+}

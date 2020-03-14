@@ -4,16 +4,23 @@ import com.enigtech.mooshroomcraft.IConfigHandler;
 import com.enigtech.mooshroomcraft.Mooshroomcraft;
 import com.enigtech.mooshroomcraft.entity.EntityResourceMooshroom;
 import com.enigtech.mooshroomcraft.render.entity.RenderFactoryResourceMooshroom;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.passive.MooshroomEntity;
+import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-@Mod.EventBusSubscriber(modid = Mooshroomcraft.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Mooshroomcraft.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class EntityRenderRegistry {
 
     @SubscribeEvent
@@ -24,4 +31,24 @@ public class EntityRenderRegistry {
             RenderingRegistry.registerEntityRenderingHandler(type, new RenderFactoryResourceMooshroom(IConfigHandler.getMushroomBlock(name)));
         }
     }
+/**
+    @SubscribeEvent
+    public static void onMooshroomMilk(PlayerInteractEvent.EntityInteractSpecific event){
+        if(event.getTarget() instanceof MooshroomEntity && !(event.getTarget() instanceof EntityResourceMooshroom)){
+            MooshroomEntity entity = (MooshroomEntity) event.getTarget();
+            if(event.getPlayer().getHeldItemMainhand().getItem() == Items.BOWL && !entity.isChild()){
+                if()
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onMooshroomSpawn(EntityJoinWorldEvent event){
+        if(!(event.getEntity() instanceof MooshroomEntity || event.getEntity() instanceof EntityResourceMooshroom)){
+            return;
+        }
+        MooshroomEntity entity = (MooshroomEntity) event.getEntity();
+        entity.writeAdditional(new CompoundNBT(){{putInt("time", 0);}});
+    }
+ **/
 }
