@@ -2,14 +2,15 @@ package com.enigtech.mooshroomcraft.item;
 
 import net.minecraft.item.Item;
 
-public class ColoredItem extends Item {
-    private int color;
+public abstract class ColoredItem extends Item implements ItemColored {
+    int color;
     public ColoredItem(int color) {
         super(new Item.Properties());
-        this.color = color;
+        this.color=color;
     }
 
-    public int getColor() {
+    @Override
+    public int getColor(){
         return color;
     }
 }

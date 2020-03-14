@@ -4,7 +4,9 @@ import com.enigtech.mooshroomcraft.block.BlockResourceMushroom;
 import com.enigtech.mooshroomcraft.entity.EntityResourceMooshroom;
 import com.enigtech.mooshroomcraft.entity.ResourceMooshroomFactory;
 import com.enigtech.mooshroomcraft.item.ColoredItem;
+import com.enigtech.mooshroomcraft.item.ItemColored;
 import com.enigtech.mooshroomcraft.item.ItemMoosher;
+import com.enigtech.mooshroomcraft.item.ItemResourceMushroomStew;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -19,7 +21,7 @@ public class IResource {
     String name;
     ItemMoosher moosher;
     Item mushroom;
-    ColoredItem mushroomStew;
+    Item mushroomStew;
     int color;
     EntityType<EntityResourceMooshroom> mooshroomEntityType;
     Block mushroomBlock;
@@ -28,7 +30,7 @@ public class IResource {
     public IResource(String resourceName, int color){
         this.name = resourceName;
         this.color = color;
-        this.mushroomStew = (ColoredItem) new ColoredItem(color).setRegistryName("mushroom_stew_"+resourceName);
+        this.mushroomStew = new ItemResourceMushroomStew(color).setRegistryName("mushroom_stew_"+resourceName);
         this.mushroomBlock = new BlockResourceMushroom(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().sound(SoundType.PLANT).lightValue(1), this.color).setRegistryName("mushroom_"+resourceName);
         this.mushroom = new BlockItem(mushroomBlock, new Item.Properties()).setRegistryName("mushroom_"+resourceName);
         this.mooshroomEntityType = createEntityType("mooshroom_"+name, new ResourceMooshroomFactory(mushroomStew, mushroomBlock), 0.9F, 1.4F, 0x7C6900, this.color);

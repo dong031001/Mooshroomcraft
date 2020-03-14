@@ -15,12 +15,10 @@ import net.minecraft.util.Hand;
 public class ItemMoosher extends ColoredItem {
 
     EntityType type;
-    int color;
 
     public ItemMoosher(EntityType type, int color) {
         super(color);
         this.type = type;
-        this.color = color;
     }
 
     @Override
@@ -45,9 +43,5 @@ public class ItemMoosher extends ColoredItem {
     @Override
     public Rarity getRarity(ItemStack itemStack){
         return Rarity.RARE;
-    }
-
-    public int getColor() {
-        return color;
     }
 }

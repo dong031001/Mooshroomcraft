@@ -2,6 +2,7 @@ package com.enigtech.mooshroomcraft;
 
 import com.enigtech.mooshroomcraft.entity.EntityResourceMooshroom;
 import com.enigtech.mooshroomcraft.item.ColoredItem;
+import com.enigtech.mooshroomcraft.item.ItemColored;
 import com.enigtech.mooshroomcraft.item.ItemMoosher;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
@@ -17,6 +18,8 @@ public class IConfigHandler {
      * 待之后实现配置文件或ZS控制增删资源
      */
     private static HashMap<String, IResource> resourceMap = new HashMap<>();
+
+
 
     static void init(){
         registerResource("iron",0xbfbfbf);
@@ -35,7 +38,7 @@ public class IConfigHandler {
         return resourceMap.get(name).mushroom;
     }
 
-    public static ColoredItem getMushroomStew(String name){
+    public static Item getMushroomStew(String name){
         return resourceMap.get(name).mushroomStew;
     }
 

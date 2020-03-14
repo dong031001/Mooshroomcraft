@@ -31,6 +31,10 @@ public class EntityResourceMooshroom extends MooshroomEntity {
         this.mushroomStew = mushroomStew;
     }
 
+    public EntityResourceMooshroom(EntityType<? extends MooshroomEntity> type, World world){
+        super(type ,world);
+    }
+
     @Override
     public Type getMooshroomType() {
         return Type.BROWN;
@@ -50,7 +54,7 @@ public class EntityResourceMooshroom extends MooshroomEntity {
                 player.dropItem(itemstack1, false);
             }
 
-            this.playSound(SoundEvents.ENTITY_MOOSHROOM_MILK, 1.0F, 1.0F);
+            player.playSound(SoundEvents.ENTITY_MOOSHROOM_MILK, 1.0F, 1.0F);
             return true;
         }
         return false;
@@ -68,7 +72,6 @@ public class EntityResourceMooshroom extends MooshroomEntity {
         if (tag.contains("TimeTillNextMilking", 3)) {
             this.tickToNextMilking = tag.getInt("TimeTillNextMilking");
         }
-
     }
 
     public boolean canMilk(){
