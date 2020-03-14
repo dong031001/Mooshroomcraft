@@ -41,10 +41,4 @@ description='''
     versionRange="[1.15.2]"
     ordering="NONE"
     side="BOTH"
-[[dependencies.mooshroomcraft]]
-    modId="kiwi"
-    mandatory=true
-    versionRange="[2.5, 2.8)"
-    ordering="BEFORE"
-    side="BOTH"
 

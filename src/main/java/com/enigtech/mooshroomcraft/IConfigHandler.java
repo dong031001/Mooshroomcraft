@@ -8,11 +8,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.crafting.FurnaceRecipe;
-import net.minecraft.item.crafting.ICraftingRecipe;
-import net.minecraft.item.crafting.RecipeManager;
-import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -24,7 +19,8 @@ public class IConfigHandler {
     private static HashMap<String, IResource> resourceMap = new HashMap<>();
 
     static void init(){
-        registerResource("iron", new ItemStack(Items.IRON_INGOT), new ItemStack(Items.IRON_INGOT), 0x0F0F0F);
+        registerResource("iron",0x0F0F0F);
+        registerResource("gold",0xffde05);
     }
 
     public static int getColor(String name){
@@ -53,8 +49,8 @@ public class IConfigHandler {
         return resourceMap.keySet();
     }
 
-    private static void registerResource(String name, ItemStack itemIn, ItemStack itemOut, int color){
-        resourceMap.put(name, new IResource(name, itemIn, itemOut, color));
+    private static void registerResource(String name, int color){
+        resourceMap.put(name, new IResource(name, color));
     }
 
 }

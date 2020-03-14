@@ -25,7 +25,7 @@ public class IResource {
     Block mushroomBlock;
 
 
-    public IResource(String resourceName, ItemStack itemIn, ItemStack itemOut, int color){
+    public IResource(String resourceName, int color){
         this.name = resourceName;
         this.color = color;
         this.mushroomStew = (ColoredItem) new ColoredItem(color).setRegistryName("mushroom_stew_"+resourceName);

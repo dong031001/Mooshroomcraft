@@ -3,7 +3,6 @@ package com.enigtech.mooshroomcraft.render;
 import com.enigtech.mooshroomcraft.IConfigHandler;
 import com.enigtech.mooshroomcraft.Mooshroomcraft;
 import com.enigtech.mooshroomcraft.item.ColoredItem;
-import com.enigtech.mooshroomcraft.item.ItemMoosher;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
