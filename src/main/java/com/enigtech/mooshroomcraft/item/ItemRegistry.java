@@ -18,6 +18,7 @@ public class ItemRegistry {
         for(String resourceName: IConfigHandler.getResourceNames()){
             event.getRegistry().register(IConfigHandler.getMushroomStew(resourceName));
             event.getRegistry().register(IConfigHandler.getMushroom(resourceName));
+            event.getRegistry().register(IConfigHandler.getMoosher(resourceName));
         }
     }
 }

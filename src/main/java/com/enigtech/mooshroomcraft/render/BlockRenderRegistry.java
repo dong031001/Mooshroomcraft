@@ -20,7 +20,7 @@ public class BlockRenderRegistry {
         BlockColors blockColors = event.getBlockColors();
         for(String resourceName: IConfigHandler.getResourceNames()){
             Block block = IConfigHandler.getMushroomBlock(resourceName);
-            RenderTypeLookup.setRenderLayer(block, RenderType.cutout());
+            RenderTypeLookup.setRenderLayer(block, RenderType.getCutoutMipped());
             blockColors.register((state, light, pos, layer)->(layer==0? -1:IConfigHandler.getColor(resourceName)), block);
         }
     }

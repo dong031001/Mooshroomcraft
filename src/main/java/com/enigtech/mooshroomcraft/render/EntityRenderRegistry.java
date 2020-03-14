@@ -24,5 +24,4 @@ public class EntityRenderRegistry {
             RenderingRegistry.registerEntityRenderingHandler(type, new RenderFactoryResourceMooshroom(IConfigHandler.getMushroomBlock(name)));
         }
     }
-
 }

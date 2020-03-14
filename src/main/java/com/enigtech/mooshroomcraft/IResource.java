@@ -29,8 +29,9 @@ public class IResource {
         this.name = resourceName;
         this.color = color;
         this.mushroomStew = (ColoredItem) new ColoredItem(color).setRegistryName("mushroom_stew_"+resourceName);
-        this.mushroomBlock = new BlockResourceMushroom(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().sound(SoundType.PLANT).lightValue(1)).setRegistryName("mushroom_"+resourceName);
+        this.mushroomBlock = new BlockResourceMushroom(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().sound(SoundType.PLANT).lightValue(1), this.color).setRegistryName("mushroom_"+resourceName);
         this.mushroom = new BlockItem(mushroomBlock, new Item.Properties()).setRegistryName("mushroom_"+resourceName);
-        this.mooshroomEntityType = createEntityType("mooshroom_"+name, new ResourceMooshroomFactory(mushroomStew, mushroomBlock), 0.9F, 1.4F, 0x7C6900, color);
+        this.mooshroomEntityType = createEntityType("mooshroom_"+name, new ResourceMooshroomFactory(mushroomStew, mushroomBlock), 0.9F, 1.4F, 0x7C6900, this.color);
+        this.moosher = (ItemMoosher) new ItemMoosher(mooshroomEntityType, this.color).setRegistryName("moosher_"+name);
     }
 }

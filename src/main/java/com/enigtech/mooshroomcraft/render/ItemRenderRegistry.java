@@ -21,6 +21,7 @@ public class ItemRenderRegistry {
         for(String resourceName: IConfigHandler.getResourceNames()){
             //registerItemColor(itemColors, IConfigHandler.getMoosher(resourceName));
             registerItemColor(itemColors, IConfigHandler.getMushroomStew(resourceName));
+            registerItemColor(itemColors, IConfigHandler.getMoosher(resourceName));
             registerItem(itemColors, IConfigHandler.getMushroom(resourceName), IConfigHandler.getColor(resourceName));
         }
     }

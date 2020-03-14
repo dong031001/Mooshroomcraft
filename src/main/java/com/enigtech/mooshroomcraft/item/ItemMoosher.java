@@ -20,6 +20,7 @@ public class ItemMoosher extends ColoredItem {
     public ItemMoosher(EntityType type, int color) {
         super(color);
         this.type = type;
+        this.color = color;
     }
 
     @Override

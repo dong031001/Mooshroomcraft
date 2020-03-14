@@ -10,9 +10,10 @@ import net.minecraft.world.server.ServerWorld;
 import java.util.Random;
 
 public class BlockResourceMushroom extends MushroomBlock {
-
-    public BlockResourceMushroom(Properties properties) {
+    public int color;
+    public BlockResourceMushroom(Properties properties, int color) {
         super(properties);
+        this.color = color;
     }
 
     @Override

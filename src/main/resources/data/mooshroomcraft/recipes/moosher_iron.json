@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iBi",
+    "RiR",
+    "iBi"
+  ],
+  "key": {
+    "i": {
+      "item": "minecraft:mushroom_iron"
+    },
+    "B": {
+      "item": "minecraft:brown_mushroom"
+    },
+    "R": {
+      "item": "minecraft:red_mushroom"
+    }
+  },
+  "result": {
+    "item": "mooshroomcraft:moosher_iron",
+    "count": 1
+  }
+}

@@ -19,8 +19,8 @@ public class IConfigHandler {
     private static HashMap<String, IResource> resourceMap = new HashMap<>();
 
     static void init(){
-        registerResource("iron",0x0F0F0F);
-        registerResource("gold",0xffde05);
+        registerResource("iron",0xbfbfbf);
+        registerResource("gold",0xfff945);
     }
 
     public static int getColor(String name){
