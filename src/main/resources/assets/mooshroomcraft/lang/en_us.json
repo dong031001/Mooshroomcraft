@@ -1,12 +1,15 @@
 {
     "item.mooshroomcraft.moosher" : "Moosher",
+
     "item.mooshroomcraft.mushroom_iron" : "Iron Mushroom",
+    "block.mooshroomcraft.mushroom_iron" : "Iron Mushroom",
     "item.mooshroomcraft.mushroom_stew_iron" : "Iron Mushroom Stew",
     "item.mooshroomcraft.moosher_iron" : "Iron Moosher",
     "entity.mooshroomcraft.mooshroom_iron" : "Iron Mooshroom",
     "item.mooshroomcraft.mooshroom_iron_spawn_egg" : "Iron Mooshroom Spawn Egg",
 
     "item.mooshroomcraft.mushroom_gold" : "Gold Mushroom",
+    "block.mooshroomcraft.mushroom_iron" : "Gold Mushroom",
     "item.mooshroomcraft.mushroom_stew_gold" : "Gold Mushroom Stew",
     "item.mooshroomcraft.moosher_gold" : "Gold Moosher",
     "entity.mooshroomcraft.mooshroom_gold" : "Gold Mooshroom",
