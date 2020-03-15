@@ -4,12 +4,15 @@ import com.enigtech.mooshroomcraft.IConfigHandler;
 import com.enigtech.mooshroomcraft.block.BlockRegistry;
 import com.enigtech.mooshroomcraft.block.BlockResourceMushroom;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.util.Constants;
+
+import java.util.Objects;
 
 import static com.enigtech.mooshroomcraft.item.ItemRegistry.ITEM_GROUP;
 
@@ -24,13 +27,22 @@ public class ItemMushroom extends BlockItem {
     public ActionResultType onItemUse(ItemUseContext context) {
         ActionResultType type = super.onItemUse(context);
         BlockItemUseContext blockItemUseContext = new BlockItemUseContext(context);
-        ((BlockResourceMushroom.TileEntityMushroom)context.getWorld().getTileEntity(blockItemUseContext.getPos())).refresh();
+        if(type.isSuccess()){
+            BlockResourceMushroom.TileEntityMushroom tileEntity = (BlockResourceMushroom.TileEntityMushroom) context.getWorld().getTileEntity(blockItemUseContext.getPos());
+            tileEntity.refresh();
+            if(context.getPlayer() instanceof ServerPlayerEntity){
+                ServerPlayerEntity player = (ServerPlayerEntity) context.getPlayer();
+                player.connection.sendPacket(tileEntity.getUpdatePacket());
+                System.out.println(tileEntity.getUpdatePacket().getNbtCompound().toString());
+            }
+        }
+
         return type;
     }
 
     @Override
     public boolean updateItemStackNBT(CompoundNBT nbt) {
-        if(nbt.contains("resource")) return false;
+        if(nbt.contains("resource")||nbt.contains("BlockEntityTag")) return false;
         nbt.putString("resource", resource);
         return true;
     }

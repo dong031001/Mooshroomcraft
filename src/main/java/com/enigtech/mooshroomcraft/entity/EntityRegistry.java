@@ -22,9 +22,9 @@ public class EntityRegistry {
     private static List<EntityType<? extends Entity>> entityTypeList = new ArrayList<>();
     private static List<Item> spawnEggList = new ArrayList<>();
 
-    public final static EntityType<EntityResourceMooshroom> RESOURCE_MOOSHROOM_ENTITY_TYPE = createEntityType("mooshroom", new ResourceMooshroomFactory(), 0.9F, 1.4F, 0x000000, 0xFFFFFF);
+    public final static EntityType<EntityResourceMooshroom> RESOURCE_MOOSHROOM_ENTITY_TYPE = createMooshroomType("mooshroom", new ResourceMooshroomFactory(), 0.9F, 1.4F, 0x000000, 0xFFFFFF);
 
-    public static EntityType<EntityResourceMooshroom> createEntityType(String registryName, EntityType.IFactory<EntityResourceMooshroom> factory, float width, float height, int eggPrimary, int eggSecondary) {
+    public static EntityType<EntityResourceMooshroom> createMooshroomType(String registryName, EntityType.IFactory<EntityResourceMooshroom> factory, float width, float height, int eggPrimary, int eggSecondary) {
 
         ResourceLocation location = new ResourceLocation(Mooshroomcraft.MOD_ID, registryName);
 

@@ -5,6 +5,7 @@ import com.enigtech.mooshroomcraft.Mooshroomcraft;
 import com.enigtech.mooshroomcraft.block.BlockResourceMushroom;
 import com.enigtech.mooshroomcraft.entity.EntityRegistry;
 import com.enigtech.mooshroomcraft.entity.EntityResourceMooshroom;
+import com.enigtech.mooshroomcraft.entity.ResourceMooshroomFactory;
 import com.enigtech.mooshroomcraft.render.entity.RenderFactoryResourceMooshroom;
 import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
@@ -16,6 +17,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
@@ -36,10 +38,10 @@ public class EntityRenderRegistry {
     }
 
     @SubscribeEvent
-    @OnlyIn(Dist.DEDICATED_SERVER)
-    public static void onBlockPlaced(BlockEvent.EntityPlaceEvent event){
-        if(event.getPlacedBlock().getBlock() instanceof BlockResourceMushroom){
-
+    @OnlyIn(Dist.CLIENT)
+    public static void onBlockPlaced(RenderLivingEvent.Post event){
+        if(event.getEntity() instanceof EntityResourceMooshroom){
+            EntityResourceMooshroom entity = (EntityResourceMooshroom) event.getEntity();
         }
     }
 /*

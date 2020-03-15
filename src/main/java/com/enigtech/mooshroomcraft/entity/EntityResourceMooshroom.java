@@ -1,5 +1,6 @@
 package com.enigtech.mooshroomcraft.entity;
 
+import com.enigtech.mooshroomcraft.item.ItemRegistry;
 import com.mojang.datafixers.Dynamic;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
@@ -14,26 +15,39 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.NBTDynamicOps;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
 public class EntityResourceMooshroom extends MooshroomEntity {
 
-    Block mushroom;
-    Item mushroomStew;
+    public static final DataParameter<String> TYPE = EntityDataManager.createKey(EntityResourceMooshroom.class, DataSerializers.STRING);
     int tickToNextMilking = 0;
-    String resource;
+    public String resource;
 
 
     public EntityResourceMooshroom(EntityType<? extends MooshroomEntity> type, World worldIn, Item mushroomStew, Block mushroom) {
         super(type, worldIn);
-        this.mushroom = mushroom;
-        this.mushroomStew = mushroomStew;
+    }
+
+    public ItemStack getMushroomStew() {
+        CompoundNBT tag = new CompoundNBT();
+        tag.putString("resource", resource);
+        return new ItemStack(ItemRegistry.MUSHROOM_STEW, 1, tag);
     }
 
     public EntityResourceMooshroom(EntityType<? extends MooshroomEntity> type, World world){
         super(type ,world);
+    }
+
+    protected void registerData(){
+        super.registerData();
+        dataManager.register(TYPE, "");
     }
 
     @Override
@@ -48,7 +62,7 @@ public class EntityResourceMooshroom extends MooshroomEntity {
             if(!player.abilities.isCreativeMode){
                 itemstack.shrink(1);
             }
-            ItemStack itemstack1 = new ItemStack(mushroomStew);
+            ItemStack itemstack1 = getMushroomStew();
             if (itemstack.isEmpty()) {
                 player.setHeldItem(hand, itemstack1);
             } else if (!player.inventory.addItemStackToInventory(itemstack1)) {
@@ -65,7 +79,10 @@ public class EntityResourceMooshroom extends MooshroomEntity {
     public void writeAdditional(CompoundNBT tag) {
         super.writeAdditional(tag);
         tag.putInt("TimeTillNextMilking", this.tickToNextMilking);
-        if(resource!=null) tag.putString("resource",resource);
+        if(resource!=null) {
+            tag.putString("resource",resource);
+            dataManager.set(TYPE,resource);
+        }
     }
 
     @Override
@@ -75,6 +92,7 @@ public class EntityResourceMooshroom extends MooshroomEntity {
             this.tickToNextMilking = tag.getInt("TimeTillNextMilking");
         } if(tag.contains("resource")){
             this.resource = tag.getString("resource");
+            dataManager.set(TYPE,resource);
         }
     }
 
@@ -91,4 +109,10 @@ public class EntityResourceMooshroom extends MooshroomEntity {
         if(!this.world.isRemote && this.isAlive() && this.tickToNextMilking==0) this.tickToNextMilking -= 1;
         super.tick();
     }
+
+    protected void entityInit(){
+
+    }
+
+
 }

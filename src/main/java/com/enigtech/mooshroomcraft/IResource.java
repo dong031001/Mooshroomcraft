@@ -11,12 +11,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
-
-import java.util.List;
-
-import static com.enigtech.mooshroomcraft.entity.EntityRegistry.createEntityType;
 
 public class IResource {
 

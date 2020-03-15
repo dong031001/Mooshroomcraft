@@ -1,8 +1,10 @@
 package com.enigtech.mooshroomcraft.render.entity;
 
+import com.enigtech.mooshroomcraft.IConfigHandler;
 import com.enigtech.mooshroomcraft.block.BlockRegistry;
 import com.enigtech.mooshroomcraft.block.BlockResourceMushroom;
 import com.enigtech.mooshroomcraft.entity.EntityResourceMooshroom;
+import com.enigtech.mooshroomcraft.render.IColoredModel;
 import com.google.common.collect.Maps;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
@@ -18,6 +20,7 @@ import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.MooshroomEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
@@ -34,7 +37,13 @@ public class RendererResourceMooshroom extends MobRenderer<EntityResourceMooshro
 
     public RendererResourceMooshroom(EntityRendererManager renderManagerIn) {
         super(renderManagerIn,new CowModel<>(), 0.7F);
-        this.addLayer(new ResourceMooshroomLayer<>(this, 121212));
+        int color = 121212;
+        EntityResourceMooshroom entity = (EntityResourceMooshroom) renderManagerIn.pointedEntity;
+        CompoundNBT tag = new CompoundNBT();
+        if(entity!=null) entity.writeAdditional(tag);
+        System.out.println(tag.toString());
+        if(tag.contains("resource")) color = IConfigHandler.getColor(tag.getString("resource"));
+        this.addLayer(new ResourceMooshroomLayer<>(this));
     }
 
     @Override
@@ -44,16 +53,17 @@ public class RendererResourceMooshroom extends MobRenderer<EntityResourceMooshro
 
     class ResourceMooshroomLayer<T extends EntityResourceMooshroom> extends MooshroomMushroomLayer<T>{
         int color;
-        public ResourceMooshroomLayer(IEntityRenderer rendererIn, int color) {
+        public ResourceMooshroomLayer(IEntityRenderer rendererIn) {
             super(rendererIn);
-            this.color = color;
         }
 
         public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
             if (!entitylivingbaseIn.isChild() && !entitylivingbaseIn.isInvisible()) {
                 BlockRendererDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRendererDispatcher();
-                ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
                 BlockState blockstate = BlockRegistry.BLOCK_RESOURCE_MUSHROOM.getDefaultState();
+
+                color = IConfigHandler.getColor(entitylivingbaseIn.getDataManager().get(EntityResourceMooshroom.TYPE));
+
                 int i = LivingRenderer.getPackedOverlay(entitylivingbaseIn, 0.0F);
                 matrixStackIn.push();
                 matrixStackIn.translate(0.2F, -0.35F, 0.5D);

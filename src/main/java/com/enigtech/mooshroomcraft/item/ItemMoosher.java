@@ -2,6 +2,7 @@ package com.enigtech.mooshroomcraft.item;
 
 import com.enigtech.mooshroomcraft.IConfigHandler;
 import com.enigtech.mooshroomcraft.entity.EntityRegistry;
+import com.enigtech.mooshroomcraft.entity.EntityResourceMooshroom;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -41,7 +42,8 @@ public class ItemMoosher extends ColoredItem {
                 else mooshroom = EntityRegistry.RESOURCE_MOOSHROOM_ENTITY_TYPE.create(playerIn.world);
                 CompoundNBT tag = new CompoundNBT();
                 tag.putString("resource", stack.getOrCreateTag().getString("resource"));
-                mooshroom.readAdditional(new CompoundNBT());
+                mooshroom.readAdditional(tag);
+                System.out.println(mooshroom.getDataManager().get(EntityResourceMooshroom.TYPE));
                 mooshroom.copyLocationAndAnglesFrom(target);
                 target.remove();
                 mooshroom.setNoAI(((CowEntity) target).isAIDisabled());

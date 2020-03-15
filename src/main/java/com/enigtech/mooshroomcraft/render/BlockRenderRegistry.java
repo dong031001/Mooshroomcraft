@@ -9,12 +9,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.color.BlockColors;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -31,6 +26,7 @@ public class BlockRenderRegistry {
             BlockResourceMushroom.TileEntityMushroom tileEntity = (BlockResourceMushroom.TileEntityMushroom) light.getTileEntity(pos);
             indicate(tileEntity.toString());
             indicate(tileEntity.resource);
+            if(layer==0) return -1;
             if(tileEntity.resource!=null) return IConfigHandler.getColor(tileEntity.resource);
             return -1;
         }, block);
