@@ -86,6 +86,7 @@ public class IConfigHandler {
     }
 
     public static int getColor(String name){
+        if(name==null||name=="") return 0;
         return resourceMap.get(name).color;
     }
 

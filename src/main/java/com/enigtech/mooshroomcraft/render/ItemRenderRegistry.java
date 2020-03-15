@@ -4,6 +4,7 @@ import com.enigtech.mooshroomcraft.IConfigHandler;
 import com.enigtech.mooshroomcraft.Mooshroomcraft;
 import com.enigtech.mooshroomcraft.item.ColoredItem;
 import com.enigtech.mooshroomcraft.item.ItemColored;
+import com.enigtech.mooshroomcraft.item.ItemRegistry;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
@@ -19,17 +20,19 @@ public class ItemRenderRegistry {
     @SubscribeEvent
     public static void onItemColorsInit(ColorHandlerEvent.Item event){
         ItemColors itemColors = event.getItemColors();
-        for(String resourceName: IConfigHandler.getResourceNames()){
-            //registerItemColor(itemColors, IConfigHandler.getMoosher(resourceName));
-            registerItemColor(itemColors, (ItemColored) IConfigHandler.getMushroomStew(resourceName));
-            registerItemColor(itemColors, IConfigHandler.getMoosher(resourceName));
-            registerItem(itemColors, IConfigHandler.getMushroom(resourceName), IConfigHandler.getColor(resourceName));
-        }
+        registerItemColor(itemColors, ItemRegistry.MUSHROOM_STEW);
+        registerItemColor(itemColors, ItemRegistry.MOOSHER);
+        registerItemColor(itemColors, ItemRegistry.MUSHROOM);
     }
 
-    static void registerItemColor(ItemColors itemColors, ItemColored item){
+    static void registerItemColor(ItemColors itemColors, Item item){
         //为Layer1上色
-        itemColors.register((stack, layer) -> (layer == 0)? -1 : item.getColor(),(Item) item);
+        itemColors.register((stack, layer) -> (layer == 0)? -1
+                : stack.getOrCreateTag().isEmpty()? -1
+                : stack.getTag().contains("resource")? IConfigHandler.getColor(stack.getTag().getString("resource"))
+                : stack.getTag().contains("BlockEntityTag")? IConfigHandler.getColor(stack.getTag().getCompound("BlockEntityTag").getString("resource"))
+                : -1
+                , item);
     }
 
     private static void registerItem(ItemColors itemColors, Item item, int color){

@@ -23,6 +23,7 @@ public class EntityResourceMooshroom extends MooshroomEntity {
     Block mushroom;
     Item mushroomStew;
     int tickToNextMilking = 0;
+    String resource;
 
 
     public EntityResourceMooshroom(EntityType<? extends MooshroomEntity> type, World worldIn, Item mushroomStew, Block mushroom) {
@@ -64,13 +65,16 @@ public class EntityResourceMooshroom extends MooshroomEntity {
     public void writeAdditional(CompoundNBT tag) {
         super.writeAdditional(tag);
         tag.putInt("TimeTillNextMilking", this.tickToNextMilking);
+        if(resource!=null) tag.putString("resource",resource);
     }
 
     @Override
     public void readAdditional(CompoundNBT tag) {
         super.readAdditional(tag);
-        if (tag.contains("TimeTillNextMilking", 3)) {
+        if (tag.contains("TimeTillNextMilking")) {
             this.tickToNextMilking = tag.getInt("TimeTillNextMilking");
+        } if(tag.contains("resource")){
+            this.resource = tag.getString("resource");
         }
     }
 

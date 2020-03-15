@@ -1,6 +1,7 @@
 package com.enigtech.mooshroomcraft.entity;
 
 import com.enigtech.mooshroomcraft.Mooshroomcraft;
+import com.enigtech.mooshroomcraft.render.entity.RenderFactoryResourceMooshroom;
 import com.google.common.base.Preconditions;
 import net.minecraft.entity.*;
 import net.minecraft.item.Item;
@@ -21,7 +22,7 @@ public class EntityRegistry {
     private static List<EntityType<? extends Entity>> entityTypeList = new ArrayList<>();
     private static List<Item> spawnEggList = new ArrayList<>();
 
-    //public final static EntityType<EntityIronMooshroom> IRON_MOOSHROOM = create("iron_mooshroom", EntityIronMooshroom::new, 0.9F, 1.4F, 0x000000, 0xFFFFFF);
+    public final static EntityType<EntityResourceMooshroom> RESOURCE_MOOSHROOM_ENTITY_TYPE = createEntityType("mooshroom", new ResourceMooshroomFactory(), 0.9F, 1.4F, 0x000000, 0xFFFFFF);
 
     public static EntityType<EntityResourceMooshroom> createEntityType(String registryName, EntityType.IFactory<EntityResourceMooshroom> factory, float width, float height, int eggPrimary, int eggSecondary) {
 

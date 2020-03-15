@@ -15,7 +15,6 @@ public class Mooshroomcraft {
     public static final String CONFIG_FOLDER = "config/mooshroomcraft";
 
     public Mooshroomcraft() throws IOException {
-        IConfigHandler.load();
         IConfigHandler.init();
         final IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         eventBus.addListener(EntityRenderRegistry::clientInit);

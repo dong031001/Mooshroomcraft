@@ -1,5 +1,6 @@
 package com.enigtech.mooshroomcraft.render.entity;
 
+import com.enigtech.mooshroomcraft.block.BlockRegistry;
 import com.enigtech.mooshroomcraft.block.BlockResourceMushroom;
 import com.enigtech.mooshroomcraft.entity.EntityResourceMooshroom;
 import com.google.common.collect.Maps;
@@ -30,12 +31,10 @@ import java.util.Random;
 
 public class RendererResourceMooshroom extends MobRenderer<EntityResourceMooshroom, CowModel<EntityResourceMooshroom>> {
 
-    Block mushroom;
 
-    public RendererResourceMooshroom(EntityRendererManager renderManagerIn, Block mushroom) {
+    public RendererResourceMooshroom(EntityRendererManager renderManagerIn) {
         super(renderManagerIn,new CowModel<>(), 0.7F);
-        this.mushroom = mushroom;
-        this.addLayer(new ResourceMooshroomLayer<>(this, mushroom));
+        this.addLayer(new ResourceMooshroomLayer<>(this, 121212));
     }
 
     @Override
@@ -44,17 +43,17 @@ public class RendererResourceMooshroom extends MobRenderer<EntityResourceMooshro
     }
 
     class ResourceMooshroomLayer<T extends EntityResourceMooshroom> extends MooshroomMushroomLayer<T>{
-        Block mushroom;
-        public ResourceMooshroomLayer(IEntityRenderer rendererIn, Block mushroom) {
+        int color;
+        public ResourceMooshroomLayer(IEntityRenderer rendererIn, int color) {
             super(rendererIn);
-            this.mushroom = mushroom;
+            this.color = color;
         }
 
         public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
             if (!entitylivingbaseIn.isChild() && !entitylivingbaseIn.isInvisible()) {
                 BlockRendererDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRendererDispatcher();
                 ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-                BlockState blockstate = mushroom.getDefaultState().getBlockState();
+                BlockState blockstate = BlockRegistry.BLOCK_RESOURCE_MUSHROOM.getDefaultState();
                 int i = LivingRenderer.getPackedOverlay(entitylivingbaseIn, 0.0F);
                 matrixStackIn.push();
                 matrixStackIn.translate(0.2F, -0.35F, 0.5D);
@@ -86,7 +85,7 @@ public class RendererResourceMooshroom extends MobRenderer<EntityResourceMooshro
 
         private void renderMushroom(BlockRendererDispatcher dispatcher, BlockState blockStateIn, MatrixStack matrixStackIn, IRenderTypeBuffer bufferTypeIn, int combinedLightIn, int combinedOverlayIn, net.minecraftforge.client.model.data.IModelData modelData){
             IBakedModel ibakedmodel = dispatcher.getModelForState(blockStateIn);
-            int i = ((BlockResourceMushroom) blockStateIn.getBlock()).color;
+            int i = color;
             float f = (float)(i >> 16 & 255) / 255.0F;
             float f1 = (float)(i >> 8 & 255) / 255.0F;
             float f2 = (float)(i & 255) / 255.0F;
