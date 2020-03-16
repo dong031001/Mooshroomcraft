@@ -1,6 +1,7 @@
 package com.enigtech.mooshroomcraft.item;
 
 import com.enigtech.mooshroomcraft.IConfigHandler;
+import com.enigtech.mooshroomcraft.MooshroomcraftPacketHandler;
 import com.enigtech.mooshroomcraft.block.BlockRegistry;
 import com.enigtech.mooshroomcraft.block.BlockResourceMushroom;
 import net.minecraft.block.Block;
@@ -11,6 +12,8 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.fml.network.NetworkDirection;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 import java.util.Objects;
 
@@ -24,22 +27,6 @@ public class ItemMushroom extends BlockItem {
         super(BlockRegistry.BLOCK_RESOURCE_MUSHROOM, new Item.Properties().group(ITEM_GROUP));
     }
 
-    public ActionResultType onItemUse(ItemUseContext context) {
-        ActionResultType type = super.onItemUse(context);
-        BlockItemUseContext blockItemUseContext = new BlockItemUseContext(context);
-        if(type.isSuccess()){
-            BlockResourceMushroom.TileEntityMushroom tileEntity = (BlockResourceMushroom.TileEntityMushroom) context.getWorld().getTileEntity(blockItemUseContext.getPos());
-            tileEntity.refresh();
-            if(context.getPlayer() instanceof ServerPlayerEntity){
-                ServerPlayerEntity player = (ServerPlayerEntity) context.getPlayer();
-                player.connection.sendPacket(tileEntity.getUpdatePacket());
-                System.out.println(tileEntity.getUpdatePacket().getNbtCompound().toString());
-            }
-        }
-
-        return type;
-    }
-
     @Override
     public boolean updateItemStackNBT(CompoundNBT nbt) {
         if(nbt.contains("resource")||nbt.contains("BlockEntityTag")) return false;
@@ -49,8 +36,7 @@ public class ItemMushroom extends BlockItem {
 
     @Override
     public String getTranslationKey(ItemStack stack) {
-        if(stack.getOrCreateTag().contains("resource")) return this.getTranslationKey()+"_"+stack.getTag().getString("resource");
-        else if(stack.getTag().contains("BlockEntityData")) return this.getTranslationKey()+"_"+stack.getTag().getCompound("BlockEntityData").getString("resource");
+        if(stack.getTag() != null && stack.getTag().contains("BlockEntityTag")) return this.getTranslationKey()+"_"+stack.getTag().getCompound("BlockEntityTag").getString("resource");
         return getTranslationKey();
     }
 
@@ -61,7 +47,6 @@ public class ItemMushroom extends BlockItem {
             for(String name : IConfigHandler.getResourceNames()){
                 ItemStack itemStack = new ItemStack(this);
                 itemStack.setTag(new CompoundNBT());
-                itemStack.getTag().putString("resource", name);
                 itemStack.getOrCreateChildTag("BlockEntityTag").putString("resource", name);
                 items.add(itemStack);
             }

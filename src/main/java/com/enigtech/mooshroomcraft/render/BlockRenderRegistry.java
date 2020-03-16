@@ -2,6 +2,7 @@ package com.enigtech.mooshroomcraft.render;
 
 import com.enigtech.mooshroomcraft.IConfigHandler;
 import com.enigtech.mooshroomcraft.Mooshroomcraft;
+import com.enigtech.mooshroomcraft.MooshroomcraftPacketHandler;
 import com.enigtech.mooshroomcraft.block.BlockRegistry;
 import com.enigtech.mooshroomcraft.block.BlockResourceMushroom;
 import net.minecraft.block.Block;
@@ -9,6 +10,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.color.BlockColors;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -21,13 +23,18 @@ public class BlockRenderRegistry {
         Block block = BlockRegistry.BLOCK_RESOURCE_MUSHROOM;
         RenderTypeLookup.setRenderLayer(block, RenderType.getCutoutMipped());
         blockColors.register((state, light, pos, layer)->{
-            indicate("ON RENDERING");
+            //indicate("ON RENDERING");
             //light.getTileEntity(pos).getWorld().notifyBlockUpdate(pos, state, state, Constants.BlockFlags.DEFAULT);
+
             BlockResourceMushroom.TileEntityMushroom tileEntity = (BlockResourceMushroom.TileEntityMushroom) light.getTileEntity(pos);
-            indicate(tileEntity.toString());
-            indicate(tileEntity.resource);
+
+            if(tileEntity.resource==null) MooshroomcraftPacketHandler.INSTANCE.sendToServer("START_"+pos.getX()+"_"+pos.getY()+"_"+pos.getZ());
+
+            CompoundNBT nbt = new CompoundNBT();
+            tileEntity.write(nbt);
+            //indicate("RENDERER SIDE: "+nbt);
             if(layer==0) return -1;
-            if(tileEntity.resource!=null) return IConfigHandler.getColor(tileEntity.resource);
+            if(nbt.contains("resource")) return IConfigHandler.getColor(nbt.getString("resource"));
             return -1;
         }, block);
     }

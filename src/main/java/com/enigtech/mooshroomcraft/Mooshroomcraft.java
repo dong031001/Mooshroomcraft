@@ -18,5 +18,6 @@ public class Mooshroomcraft {
         IConfigHandler.init();
         final IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         eventBus.addListener(EntityRenderRegistry::clientInit);
+        new MooshroomcraftPacketHandler();
     }
 }

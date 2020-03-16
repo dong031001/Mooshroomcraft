@@ -29,8 +29,8 @@ public class ItemRenderRegistry {
         //为Layer1上色
         itemColors.register((stack, layer) -> (layer == 0)? -1
                 : stack.getOrCreateTag().isEmpty()? -1
-                : stack.getTag().contains("resource")? IConfigHandler.getColor(stack.getTag().getString("resource"))
                 : stack.getTag().contains("BlockEntityTag")? IConfigHandler.getColor(stack.getTag().getCompound("BlockEntityTag").getString("resource"))
+                : stack.getTag().contains("resource")? IConfigHandler.getColor(stack.getTag().getString("resource"))
                 : -1
                 , item);
     }

@@ -2,6 +2,7 @@ package com.enigtech.mooshroomcraft.block;
 
 import com.enigtech.mooshroomcraft.IConfigHandler;
 import com.enigtech.mooshroomcraft.Mooshroomcraft;
+import com.enigtech.mooshroomcraft.item.ItemRegistry;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MushroomBlock;
@@ -11,17 +12,21 @@ import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.model.IBakedModel;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.state.IProperty;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.storage.loot.LootContext;
+import net.minecraft.world.storage.loot.LootParameters;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.model.data.IModelData;
@@ -74,6 +79,32 @@ public class BlockResourceMushroom extends MushroomBlock {
         return new TileEntityMushroom();
     }
 
+    @Override
+    public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+        ArrayList<ItemStack> list = new ArrayList<>();
+        TileEntity tileEntityIn = builder.get(LootParameters.BLOCK_ENTITY);
+        ItemStack itemStack = new ItemStack(this);
+
+        CompoundNBT nbt = new CompoundNBT();
+        tileEntityIn.write(nbt);
+
+        System.out.println("ON BLOCK DROP :"+(nbt));
+        CompoundNBT itemData = itemStack.getTag();
+
+        if(itemData == null) itemData = new CompoundNBT();
+
+        nbt.remove("x");
+        nbt.remove("y");
+        nbt.remove("z");
+        nbt.remove("id");
+
+        itemData.put("BlockEntityTag", nbt);
+        itemStack.setTag(itemData);
+
+        list.add(itemStack);
+        return list;
+    }
+
     public static class TileEntityMushroom extends TileEntity{
         public String resource;
 
@@ -100,7 +131,7 @@ public class BlockResourceMushroom extends MushroomBlock {
         @Nullable
         public SUpdateTileEntityPacket getUpdatePacket() {
             CompoundNBT tag = new CompoundNBT();
-            tag.putString("resource", resource);
+            if(resource!=null) tag.putString("resource", resource);
             return new SUpdateTileEntityPacket(this.pos,1,tag);
         }
 
@@ -121,25 +152,6 @@ public class BlockResourceMushroom extends MushroomBlock {
         public void handleUpdateTag(CompoundNBT data) {
             System.out.println("CLIENT SIDE: "+resource);
             if(data.contains("resource")) this.resource=data.getString("resource");
-        }
-
-        @Override
-        @OnlyIn(Dist.DEDICATED_SERVER)
-        public void onLoad() {
-            super.onLoad();
-            this.refresh();
-        }
-
-        public void refresh()
-        {
-            if (hasWorld() && !world.isRemote)
-            {
-                System.out.println("REFRESHING WITH RESOURCE: "+resource);
-                BlockState state = world.getBlockState(pos);
-                requestModelDataUpdate();
-                BlockState grass = world.getBlockState(pos.down());
-                world.notifyBlockUpdate(pos.down(),  grass, grass, Constants.BlockFlags.DEFAULT);
-            }
         }
     }
 }
