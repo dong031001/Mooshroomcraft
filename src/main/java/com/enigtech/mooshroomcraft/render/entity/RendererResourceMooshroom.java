@@ -2,34 +2,23 @@ package com.enigtech.mooshroomcraft.render.entity;
 
 import com.enigtech.mooshroomcraft.IConfigHandler;
 import com.enigtech.mooshroomcraft.block.BlockRegistry;
-import com.enigtech.mooshroomcraft.block.BlockResourceMushroom;
 import com.enigtech.mooshroomcraft.entity.EntityResourceMooshroom;
-import com.enigtech.mooshroomcraft.render.IColoredModel;
-import com.google.common.collect.Maps;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.renderer.entity.layers.MooshroomMushroomLayer;
 import net.minecraft.client.renderer.entity.model.CowModel;
 import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Util;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.ILightReader;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 public class RendererResourceMooshroom extends MobRenderer<EntityResourceMooshroom, CowModel<EntityResourceMooshroom>> {
@@ -37,12 +26,10 @@ public class RendererResourceMooshroom extends MobRenderer<EntityResourceMooshro
 
     public RendererResourceMooshroom(EntityRendererManager renderManagerIn) {
         super(renderManagerIn,new CowModel<>(), 0.7F);
-        int color = 121212;
         EntityResourceMooshroom entity = (EntityResourceMooshroom) renderManagerIn.pointedEntity;
         CompoundNBT tag = new CompoundNBT();
         if(entity!=null) entity.writeAdditional(tag);
         System.out.println(tag.toString());
-        if(tag.contains("resource")) color = IConfigHandler.getColor(tag.getString("resource"));
         this.addLayer(new ResourceMooshroomLayer<>(this));
     }
 
@@ -57,14 +44,14 @@ public class RendererResourceMooshroom extends MobRenderer<EntityResourceMooshro
             super(rendererIn);
         }
 
-        public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-            if (!entitylivingbaseIn.isChild() && !entitylivingbaseIn.isInvisible()) {
+        public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, T entityLivingBaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+            if (!entityLivingBaseIn.isChild() && !entityLivingBaseIn.isInvisible()) {
                 BlockRendererDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRendererDispatcher();
                 BlockState blockstate = BlockRegistry.BLOCK_RESOURCE_MUSHROOM.getDefaultState();
 
-                color = IConfigHandler.getColor(entitylivingbaseIn.getDataManager().get(EntityResourceMooshroom.TYPE));
+                color = IConfigHandler.getColor(entityLivingBaseIn.getDataManager().get(EntityResourceMooshroom.TYPE));
 
-                int i = LivingRenderer.getPackedOverlay(entitylivingbaseIn, 0.0F);
+                int i = LivingRenderer.getPackedOverlay(entityLivingBaseIn, 0.0F);
                 matrixStackIn.push();
                 matrixStackIn.translate(0.2F, -0.35F, 0.5D);
                 matrixStackIn.rotate(Vector3f.YP.rotationDegrees(-48.0F));

@@ -2,8 +2,6 @@ package com.enigtech.mooshroomcraft.render;
 
 import com.enigtech.mooshroomcraft.IConfigHandler;
 import com.enigtech.mooshroomcraft.Mooshroomcraft;
-import com.enigtech.mooshroomcraft.item.ColoredItem;
-import com.enigtech.mooshroomcraft.item.ItemColored;
 import com.enigtech.mooshroomcraft.item.ItemRegistry;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.item.Item;

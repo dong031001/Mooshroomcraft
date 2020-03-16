@@ -6,7 +6,6 @@ import com.enigtech.mooshroomcraft.MooshroomcraftPacketHandler;
 import com.enigtech.mooshroomcraft.block.BlockRegistry;
 import com.enigtech.mooshroomcraft.block.BlockResourceMushroom;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.color.BlockColors;
@@ -23,18 +22,19 @@ public class BlockRenderRegistry {
         Block block = BlockRegistry.BLOCK_RESOURCE_MUSHROOM;
         RenderTypeLookup.setRenderLayer(block, RenderType.getCutoutMipped());
         blockColors.register((state, light, pos, layer)->{
+            if(layer==0) return -1;
             //indicate("ON RENDERING");
             //light.getTileEntity(pos).getWorld().notifyBlockUpdate(pos, state, state, Constants.BlockFlags.DEFAULT);
 
             BlockResourceMushroom.TileEntityMushroom tileEntity = (BlockResourceMushroom.TileEntityMushroom) light.getTileEntity(pos);
 
-            if(tileEntity.resource==null) MooshroomcraftPacketHandler.INSTANCE.sendToServer("START_"+pos.getX()+"_"+pos.getY()+"_"+pos.getZ());
+            if(tileEntity!=null){
+                if(tileEntity.resource==null) MooshroomcraftPacketHandler.INSTANCE.sendToServer("START_"+pos.getX()+"_"+pos.getY()+"_"+pos.getZ());
+                CompoundNBT nbt = new CompoundNBT();
+                tileEntity.write(nbt);
+                if(nbt.contains("resource")) return IConfigHandler.getColor(nbt.getString("resource"));
+            }
 
-            CompoundNBT nbt = new CompoundNBT();
-            tileEntity.write(nbt);
-            //indicate("RENDERER SIDE: "+nbt);
-            if(layer==0) return -1;
-            if(nbt.contains("resource")) return IConfigHandler.getColor(nbt.getString("resource"));
             return -1;
         }, block);
     }

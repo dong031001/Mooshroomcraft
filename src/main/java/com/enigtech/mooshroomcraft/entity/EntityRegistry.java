@@ -1,14 +1,11 @@
 package com.enigtech.mooshroomcraft.entity;
 
 import com.enigtech.mooshroomcraft.Mooshroomcraft;
-import com.enigtech.mooshroomcraft.render.entity.RenderFactoryResourceMooshroom;
-import com.google.common.base.Preconditions;
 import net.minecraft.entity.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

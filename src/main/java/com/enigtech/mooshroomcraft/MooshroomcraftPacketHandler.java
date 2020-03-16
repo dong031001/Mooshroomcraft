@@ -1,10 +1,7 @@
 package com.enigtech.mooshroomcraft;
 
 import com.enigtech.mooshroomcraft.block.BlockResourceMushroom;
-import com.mojang.brigadier.Message;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.network.play.ClientPlayNetHandler;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.PacketBuffer;
@@ -12,23 +9,16 @@ import net.minecraft.network.play.ServerPlayNetHandler;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.network.NetworkEvent;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
-import org.lwjgl.system.windows.MSG;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Supplier;
 
 public class MooshroomcraftPacketHandler {
-
-    private int index = 0;
 
     private static final String PROTOCOL_VERSION = "1";
     public static final SimpleChannel INSTANCE = NetworkRegistry.newSimpleChannel(
@@ -39,6 +29,7 @@ public class MooshroomcraftPacketHandler {
     );
 
     public MooshroomcraftPacketHandler(){
+        int index = 0;
         INSTANCE.registerMessage(index++, String.class, Coder::encode, Coder::decode, Coder::onHandleString);
         INSTANCE.registerMessage(index++, BlockPos.class, Coder::encodeBlockPos, Coder::decodeBlockPos, Coder::onHandleBlockPos);
     }
@@ -53,7 +44,7 @@ public class MooshroomcraftPacketHandler {
 
         public static void onHandleBlockPos(BlockPos pos, Supplier<NetworkEvent.Context> supplier){
             supplier.get().enqueueWork(()->{
-                System.out.println("ON BLOCKPOS RECEIVED");
+                System.out.println("ON BLOCK POS RECEIVED");
                 INetHandler handler = supplier.get().getNetworkManager().getNetHandler();
                 if(handler instanceof ServerPlayNetHandler) {
                     System.out.println("REFRESHING: ON SERVER RECEIVE");

@@ -47,7 +47,7 @@ public class IConfigHandler {
     public IConfigHandler addEffect(IEffectHandler effect){
         IEffectHandler[] oldEffects = effects.clone();
         effects = new IEffectHandler[oldEffects.length+1];
-        if(oldEffects.length!=0) for(int i = 0; i<oldEffects.length;i++) effects[i]=oldEffects[i];
+        if(oldEffects.length!=0) System.arraycopy(oldEffects, 0, effects, 0, oldEffects.length);
         effects[effects.length-1] = effect;
         return this;
     }
@@ -62,9 +62,14 @@ public class IConfigHandler {
         public int time;
     }
 
-    private static final IConfigHandler[] defaultResources = new IConfigHandler[]{
-            new IConfigHandler("iron", 0xbfbfbf).addEffect("minecraft:slowness", 200).addEffect("minecraft:absorption", 400),
-            new IConfigHandler("gold", 0xfff945)
+    private static IConfigHandler[] defaultResources = new IConfigHandler[]{
+            new IConfigHandler("iron", 0xbfbfbf).addEffect("minecraft:slowness", 200).addEffect("minecraft:resistance", 1200),
+            new IConfigHandler("gold", 0xfff945).addEffect("minecraft:haste",400).addEffect("minecraft:absorption", 800),
+            new IConfigHandler("diamond", 55295).addEffect("minecraft:glowing",200).addEffect("minecraft:resistance", 2400),
+            new IConfigHandler("lapis", 3151789).addEffect("minecraft:speed", 800),
+            new IConfigHandler("coal", 3947580).addEffect("minecraft:fire_resistance", 2400).addEffect("minecraft:mining_fatigue", 800),
+            new IConfigHandler("quartz", 16777215).addEffect("minecraft:night_vision", 2400),
+            new IConfigHandler("redstone", 0xff0000).addEffect("minecraft:haste", 400).addEffect("minecraft:jump_boost", 1200)
     };
 
 
@@ -99,12 +104,12 @@ public class IConfigHandler {
     }
 
     public static int getColor(String name){
-        if(name==null||name=="") return 0;
+        if(name==null|| name.equals("")) return 0;
         return resourceMap.get(name).color;
     }
 
     public static String getDisplayName(String name){
-        if(name==null||name=="") return null;
+        if(name==null|| name.equals("")) return null;
         return resourceMap.get(name).displayName;
     }
 

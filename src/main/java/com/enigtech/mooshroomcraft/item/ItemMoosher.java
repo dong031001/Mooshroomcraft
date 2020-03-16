@@ -1,19 +1,14 @@
 package com.enigtech.mooshroomcraft.item;
 
 import com.enigtech.mooshroomcraft.IConfigHandler;
-import com.enigtech.mooshroomcraft.Mooshroomcraft;
 import com.enigtech.mooshroomcraft.entity.EntityRegistry;
 import com.enigtech.mooshroomcraft.entity.EntityResourceMooshroom;
 import com.enigtech.mooshroomcraft.util.ItemUtil;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
@@ -21,7 +16,6 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 
 public class ItemMoosher extends ColoredItem {
 

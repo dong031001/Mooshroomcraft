@@ -1,11 +1,6 @@
 package com.enigtech.mooshroomcraft.entity;
 
-import com.enigtech.mooshroomcraft.block.BlockResourceMushroom;
-import net.minecraft.block.Block;
-import net.minecraft.block.MushroomBlock;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 public class ResourceMooshroomFactory implements EntityType.IFactory<EntityResourceMooshroom> {

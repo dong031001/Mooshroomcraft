@@ -1,12 +1,7 @@
 package com.enigtech.mooshroomcraft.item;
 
 
-import com.enigtech.mooshroomcraft.IConfigHandler;
 import com.enigtech.mooshroomcraft.Mooshroomcraft;
-import com.enigtech.mooshroomcraft.block.BlockRegistry;
-import com.enigtech.mooshroomcraft.entity.EntityRegistry;
-import net.minecraft.entity.EntityType;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
