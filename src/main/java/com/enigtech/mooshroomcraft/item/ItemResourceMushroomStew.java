@@ -1,6 +1,9 @@
 package com.enigtech.mooshroomcraft.item;
 
 import com.enigtech.mooshroomcraft.IConfigHandler;
+import com.enigtech.mooshroomcraft.util.ItemUtil;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.EffectInstance;
@@ -8,32 +11,36 @@ import net.minecraft.potion.Effects;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.Potions;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.World;
 
 public class ItemResourceMushroomStew extends Item {
 
     String resource;
 
     public ItemResourceMushroomStew() {
-        super(new Properties().group(ItemRegistry.ITEM_GROUP).food((new Food.Builder()
-                .hunger(6)
-                .saturation(6)
-                .effect(new EffectInstance(Effects.SLOWNESS,100),100)
-                .effect(new EffectInstance(Effects.ABSORPTION,200),100)
-                .build()
-        )));
+        super(new Properties().group(ItemRegistry.ITEM_GROUP).food((new Food.Builder().hunger(6).saturation(6).build())));
+    }
+
+    @Override
+    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+        ItemStack itemstack = super.onItemUseFinish(stack, worldIn, entityLiving);
+        if(entityLiving instanceof PlayerEntity){
+            ((PlayerEntity)entityLiving).addItemStackToInventory(new ItemStack(Items.BOWL));
+        }
+        return itemstack;
     }
 
     @Override
     public boolean updateItemStackNBT(CompoundNBT nbt) {
         if(nbt.contains("resource")) return false;
         nbt.putString("resource", resource);
+
         return true;
     }
 
-    @Override
-    public String getTranslationKey(ItemStack stack) {
-        if(stack.getOrCreateTag().contains("resource")) return this.getTranslationKey()+"_"+stack.getTag().getString("resource");
-        return getTranslationKey();
+    public ITextComponent getDisplayName(ItemStack stack) {
+        return ItemUtil.getDisplayName(stack, "mushroom_stew");
     }
 
     @Override

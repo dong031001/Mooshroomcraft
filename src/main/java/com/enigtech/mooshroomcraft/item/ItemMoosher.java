@@ -1,8 +1,11 @@
 package com.enigtech.mooshroomcraft.item;
 
 import com.enigtech.mooshroomcraft.IConfigHandler;
+import com.enigtech.mooshroomcraft.Mooshroomcraft;
 import com.enigtech.mooshroomcraft.entity.EntityRegistry;
 import com.enigtech.mooshroomcraft.entity.EntityResourceMooshroom;
+import com.enigtech.mooshroomcraft.util.ItemUtil;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -17,6 +20,8 @@ import net.minecraft.item.Rarity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 
 public class ItemMoosher extends ColoredItem {
 
@@ -67,10 +72,8 @@ public class ItemMoosher extends ColoredItem {
         return true;
     }
 
-    @Override
-    public String getTranslationKey(ItemStack stack) {
-        if(stack.getOrCreateTag().contains("resource")) return this.getTranslationKey()+"_"+stack.getTag().getString("resource");
-        return getTranslationKey();
+    public ITextComponent getDisplayName(ItemStack stack) {
+        return ItemUtil.getDisplayName(stack, "moosher");
     }
 
     @Override

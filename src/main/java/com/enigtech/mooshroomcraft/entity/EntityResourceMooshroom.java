@@ -23,6 +23,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class EntityResourceMooshroom extends MooshroomEntity {
 
@@ -30,15 +31,10 @@ public class EntityResourceMooshroom extends MooshroomEntity {
     int tickToNextMilking = 0;
     public String resource;
 
-
-    public EntityResourceMooshroom(EntityType<? extends MooshroomEntity> type, World worldIn, Item mushroomStew, Block mushroom) {
-        super(type, worldIn);
-    }
-
     public ItemStack getMushroomStew() {
-        CompoundNBT tag = new CompoundNBT();
-        tag.putString("resource", resource);
-        return new ItemStack(ItemRegistry.MUSHROOM_STEW, 1, tag);
+        ItemStack stack = new ItemStack(ItemRegistry.MUSHROOM_STEW);
+        stack.getOrCreateTag().putString("resource", dataManager.get(TYPE));
+        return stack;
     }
 
     public EntityResourceMooshroom(EntityType<? extends MooshroomEntity> type, World world){
@@ -68,8 +64,6 @@ public class EntityResourceMooshroom extends MooshroomEntity {
             } else if (!player.inventory.addItemStackToInventory(itemstack1)) {
                 player.dropItem(itemstack1, false);
             }
-
-            player.playSound(SoundEvents.ENTITY_MOOSHROOM_MILK, 1.0F, 1.0F);
             return true;
         }
         return false;
@@ -99,6 +93,7 @@ public class EntityResourceMooshroom extends MooshroomEntity {
     public boolean canMilk(){
         if(tickToNextMilking==0){
             tickToNextMilking+=400;
+            this.playSound(SoundEvents.ENTITY_MOOSHROOM_MILK, 1.0F, 1.0F);
             return true;
         }
         return false;
@@ -106,7 +101,7 @@ public class EntityResourceMooshroom extends MooshroomEntity {
 
     @Override
     public void tick(){
-        if(!this.world.isRemote && this.isAlive() && this.tickToNextMilking==0) this.tickToNextMilking -= 1;
+        if(!this.world.isRemote && this.isAlive() && this.tickToNextMilking>0) this.tickToNextMilking -= 1;
         super.tick();
     }
 

@@ -13,9 +13,12 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.potion.EffectInstance;
 
+import java.util.ArrayList;
+
 public class IResource {
 
     String name;
+    String displayName;
     ItemMoosher moosher;
     Item mushroom;
     Item mushroomStew;
@@ -25,11 +28,11 @@ public class IResource {
     Block mushroomBlock;
 
 
-    public IResource(String resourceName, int color, EffectInstance... effectInstances){
-
+    public IResource(String resourceName, int color, String displayName, ArrayList<EffectInstance> stewEffects){
+        this.displayName = displayName;
         this.name = resourceName;
         this.color = color;
-        this.stewEffect = effectInstances;
+        this.stewEffect = stewEffects.toArray(new EffectInstance[0]);
 
     }
 }

@@ -6,6 +6,11 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import com.enigtech.mooshroomcraft.util.IOHandler;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -22,6 +27,7 @@ public class IConfigHandler {
     private static HashMap<String, IResource> resourceMap = new HashMap<>();
 
     public String name;
+    public String displayName;
     public int color;
     public IEffectHandler[] effects = new IEffectHandler[]{};
 
@@ -79,7 +85,14 @@ public class IConfigHandler {
 
     static void init() throws IOException {
         for(IConfigHandler resource:loadResources()){
-            registerResource(resource.name, resource.color);
+            ArrayList<EffectInstance> effects = new ArrayList<>();
+
+            for(IEffectHandler effectHandler:resource.effects){
+                Effect effect = ForgeRegistries.POTIONS.getValue(new ResourceLocation(effectHandler.effect));
+                effects.add(new EffectInstance(effect, effectHandler.time));
+            }
+
+            registerResource(resource.name, resource.color, resource.displayName, effects);
         }
         //registerResource("iron",0xbfbfbf);
         //registerResource("gold",0xfff945);
@@ -88,6 +101,15 @@ public class IConfigHandler {
     public static int getColor(String name){
         if(name==null||name=="") return 0;
         return resourceMap.get(name).color;
+    }
+
+    public static String getDisplayName(String name){
+        if(name==null||name=="") return null;
+        return resourceMap.get(name).displayName;
+    }
+
+    public static EffectInstance[] getEffectInstances(String name){
+        return resourceMap.get(name).stewEffect;
     }
 
     public static ItemMoosher getMoosher(String name){
@@ -112,12 +134,18 @@ public class IConfigHandler {
         return resourceMap.keySet();
     }
 
-    private static void registerResource(String name, int color){
-        resourceMap.put(name, new IResource(name, color));
+    private static void registerResource(String name, int color, String displayName, ArrayList<EffectInstance> effectInstances){
+        resourceMap.put(name, new IResource(name, color, displayName, effectInstances));
     }
 
     public String toString(){
         return this.name+", color:"+color;
+    }
+
+    public static String getNameFromTag(CompoundNBT tag){
+        if(tag.contains("resource")) return tag.getString("resource");
+        if(tag.contains("BlockEntityTag")&&tag.getCompound("BlockEntityTag").contains("resource")) return tag.getCompound("BlockEntityTag").getString("resource");
+        return null;
     }
 
 }

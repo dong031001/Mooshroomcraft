@@ -1,17 +1,18 @@
 {
   "item.mooshroomcraft.moosher" : "哞哞粉",
+  "item.mooshroomcraft.mushroom" : "蘑菇",
+  "block.mooshroomcraft.mushroom" : "蘑菇",
+  "item.mooshroomcraft.mushroom_stew" : "蘑菇煲",
+  "item.mooshroomcraft.mooshroom_spawn_egg" : "哞菇刷怪蛋",
 
-  "item.mooshroomcraft.mushroom_iron" : "铁蘑菇",
-  "block.mooshroomcraft.mushroom_iron" : "铁蘑菇",
-  "item.mooshroomcraft.mushroom_stew_iron" : "铁蘑菇煲",
-  "item.mooshroomcraft.moosher_iron" : "铁哞哞粉",
-  "entity.mooshroomcraft.mooshroom_iron" : "铁哞菇",
-  "item.mooshroomcraft.mooshroom_iron_spawn_egg" : "铁哞菇刷怪蛋",
+  "format.mooshroomcraft.moosher" : "%s哞哞粉",
+  "format.mooshroomcraft.mushroom" : "%s蘑菇",
+  "format.mooshroomcraft.mushroom_stew" : "%s蘑菇煲",
+  "format.mooshroomcraft.mooshroom_spawn_egg" : "%s哞菇刷怪蛋",
 
-  "item.mooshroomcraft.mushroom_gold" : "金蘑菇",
-  "block.mooshroomcraft.mushroom_gold" : "金蘑菇",
-  "item.mooshroomcraft.mushroom_stew_gold" : "金蘑菇煲",
-  "item.mooshroomcraft.moosher_gold" : "金哞哞粉",
-  "entity.mooshroomcraft.mooshroom_gold" : "金哞菇",
-  "item.mooshroomcraft.mooshroom_gold_spawn_egg" : "金哞菇刷怪蛋"
+  "resource.mooshroomcraft.iron" : "铁",
+  "resource.mooshroomcraft.gold" : "金",
+  "resource.mooshroomcraft.diamond" : "钻石",
+  "resource.mooshroomcraft.lapis" : "青金石"
+
 }

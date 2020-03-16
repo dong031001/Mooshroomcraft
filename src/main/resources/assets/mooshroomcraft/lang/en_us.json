@@ -1,17 +1,17 @@
 {
     "item.mooshroomcraft.moosher" : "Moosher",
+    "item.mooshroomcraft.mushroom" : "Mushroom",
+    "block.mooshroomcraft.mushroom" : "Mushroom",
+    "item.mooshroomcraft.mushroom_stew" : "Mushroom Stew",
+    "item.mooshroomcraft.mooshroom_spawn_egg" : "Mooshroom Spawn Egg",
 
-    "item.mooshroomcraft.mushroom_iron" : "Iron Mushroom",
-    "block.mooshroomcraft.mushroom_iron" : "Iron Mushroom",
-    "item.mooshroomcraft.mushroom_stew_iron" : "Iron Mushroom Stew",
-    "item.mooshroomcraft.moosher_iron" : "Iron Moosher",
-    "entity.mooshroomcraft.mooshroom_iron" : "Iron Mooshroom",
-    "item.mooshroomcraft.mooshroom_iron_spawn_egg" : "Iron Mooshroom Spawn Egg",
+    "format.mooshroomcraft.moosher" : "%s Moosher",
+    "format.mooshroomcraft.mushroom" : "%s Mushroom",
+    "format.mooshroomcraft.mushroom_stew" : "%s Mushroom Stew",
+    "format.mooshroomcraft.mooshroom_spawn_egg" : "%s Mooshroom Spawn Egg",
 
-    "item.mooshroomcraft.mushroom_gold" : "Gold Mushroom",
-    "block.mooshroomcraft.mushroom_iron" : "Gold Mushroom",
-    "item.mooshroomcraft.mushroom_stew_gold" : "Gold Mushroom Stew",
-    "item.mooshroomcraft.moosher_gold" : "Gold Moosher",
-    "entity.mooshroomcraft.mooshroom_gold" : "Gold Mooshroom",
-    "item.mooshroomcraft.mooshroom_gold_spawn_egg" : "Gold Mooshroom Spawn Egg"
+    "resource.mooshroomcraft.iron" : "Iron",
+    "resource.mooshroomcraft.gold" : "Gold",
+    "resource.mooshroomcraft.diamond" : "Diamond",
+    "resource.mooshroomcraft.lapis" : "Lapis"
 }

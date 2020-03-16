@@ -38,6 +38,8 @@ public class IOHandler {
                 resource.name = reader.nextString();
             } else if ("color".equals(s)) {
                 resource.color = reader.nextInt();
+            } else if("displayName".equals(s)){
+                resource.displayName = reader.nextString();
             } else if ("effects".equals(s)) {
                 ArrayList<IEffectHandler> effectHandlers = readEffects(reader);
                 resource.effects = effectHandlers.toArray(new IEffectHandler[0]);

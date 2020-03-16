@@ -1,16 +1,22 @@
 package com.enigtech.mooshroomcraft.item;
 
 import com.enigtech.mooshroomcraft.IConfigHandler;
+import com.enigtech.mooshroomcraft.Mooshroomcraft;
 import com.enigtech.mooshroomcraft.MooshroomcraftPacketHandler;
 import com.enigtech.mooshroomcraft.block.BlockRegistry;
 import com.enigtech.mooshroomcraft.block.BlockResourceMushroom;
+import com.enigtech.mooshroomcraft.util.ItemUtil;
 import net.minecraft.block.Block;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.network.NetworkDirection;
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
@@ -34,10 +40,8 @@ public class ItemMushroom extends BlockItem {
         return true;
     }
 
-    @Override
-    public String getTranslationKey(ItemStack stack) {
-        if(stack.getTag() != null && stack.getTag().contains("BlockEntityTag")) return this.getTranslationKey()+"_"+stack.getTag().getCompound("BlockEntityTag").getString("resource");
-        return getTranslationKey();
+    public ITextComponent getDisplayName(ItemStack stack) {
+        return ItemUtil.getDisplayName(stack, "mushroom");
     }
 
     @Override
