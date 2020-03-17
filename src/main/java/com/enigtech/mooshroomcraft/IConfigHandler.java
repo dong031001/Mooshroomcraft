@@ -102,7 +102,7 @@ public class IConfigHandler {
             new IConfigHandler("iron", 0xbfbfbf, new IItemStack("minecraft:iron_ingot")).addEffect("minecraft:slowness", 200).addEffect("minecraft:resistance", 1200),
             new IConfigHandler("gold", 0xfff945, new IItemStack("minecraft:gold_nugget"),new IItemStack("minecraft:gold_nugget", 6)).addEffect("minecraft:haste",400).addEffect("minecraft:absorption", 800),
             new IConfigHandler("diamond", 55295, new IItemStack("minecraft:diamond")).addEffect("minecraft:glowing",200).addEffect("minecraft:resistance", 2400),
-            new IConfigHandler("lapis", 3151789, new IItemStack("minecraft:lapis_lazuli")).addEffect("minecraft:speed", 800),
+            new IConfigHandler("lapis", 3151789, new IItemStack("minecraft:lapis_lazuli"), new IItemStack("minecraft:lapis_lazuli", 3)).addEffect("minecraft:speed", 800),
             new IConfigHandler("coal", 3947580, new IItemStack("minecraft:coal")).addEffect("minecraft:fire_resistance", 2400).addEffect("minecraft:mining_fatigue", 800),
             new IConfigHandler("quartz", 16777215, new IItemStack("minecraft:quartz")).addEffect("minecraft:night_vision", 2400),
             new IConfigHandler("redstone", 0xff0000, new IItemStack("minecraft:redstone"), new IItemStack("minecraft:redstone", 3)).addEffect("minecraft:haste", 400).addEffect("minecraft:jump_boost", 1200)
