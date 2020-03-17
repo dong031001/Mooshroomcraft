@@ -4,6 +4,9 @@
     "block.mooshroomcraft.mushroom" : "Mushroom",
     "item.mooshroomcraft.mushroom_stew" : "Mushroom Stew",
     "item.mooshroomcraft.mooshroom_spawn_egg" : "Mooshroom Spawn Egg",
+    "block.mooshroomcraft.stew_distiller": "Mushroom Stew Distiller",
+    "gui.mooshroomcraft.stew_distiller": "Mushroom Stew Distiller",
+
 
     "format.mooshroomcraft.moosher" : "%s Moosher",
     "format.mooshroomcraft.mushroom" : "%s Mushroom",

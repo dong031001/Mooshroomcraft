@@ -5,6 +5,7 @@ import com.enigtech.mooshroomcraft.tile.container.ContainerStewDistiller;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.AbstractFurnaceContainer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
@@ -42,6 +43,13 @@ public class ScreenStewDistiller extends ContainerScreen<ContainerStewDistiller>
         int relativeX = (this.width - this.xSize) / 2;
         int relativeY = (this.height - this.ySize) / 2;
         this.blit(relativeX, relativeY, 0, 0, this.xSize, this.ySize);
+        if (this.container.isLit()) {
+            int k = this.container.getBurnLeftScaled();
+            this.blit(relativeX + 56, relativeY + 36 + 12 - k, 176, 12 - k, 14, k + 1);
+        }
+
+        int l = this.container.getProgressionScaled();
+        this.blit(relativeX + 79, relativeY + 34, 176, 14, l + 1, 16);
     }
 
 }

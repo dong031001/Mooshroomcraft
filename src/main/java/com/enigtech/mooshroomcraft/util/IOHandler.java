@@ -1,6 +1,7 @@
 package com.enigtech.mooshroomcraft.util;
 
 import com.enigtech.mooshroomcraft.IConfigHandler;
+import com.enigtech.mooshroomcraft.IConfigHandler.IItemStack;
 import com.enigtech.mooshroomcraft.IConfigHandler.IEffectHandler;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -43,6 +44,10 @@ public class IOHandler {
             } else if ("effects".equals(s)) {
                 ArrayList<IEffectHandler> effectHandlers = readEffects(reader);
                 resource.effects = effectHandlers.toArray(new IEffectHandler[0]);
+            } else if("constructor".equals(s)){
+                resource.constructor = readIItemStack(reader);
+            } else if("result".equals(s)){
+                resource.result = readIItemStack(reader);
             } else {
                 reader.skipValue();
             }
@@ -74,5 +79,22 @@ public class IOHandler {
         }
         reader.endObject();
         return effectHandler;
+    }
+
+    public static IItemStack readIItemStack(JsonReader reader) throws IOException {
+        reader.beginObject();
+        IItemStack iItemStack = new IItemStack();
+        while(reader.hasNext()){
+            String s = reader.nextName();
+            if ("id".equals(s)) {
+                iItemStack.id = reader.nextString();
+            } else if ("count".equals(s)) {
+                iItemStack.count = reader.nextInt();
+            } else {
+                reader.skipValue();
+            }
+        }
+        reader.endObject();
+        return iItemStack;
     }
 }
