@@ -5,7 +5,10 @@ import com.enigtech.mooshroomcraft.Mooshroomcraft;
 import com.enigtech.mooshroomcraft.MooshroomcraftPacketHandler;
 import com.enigtech.mooshroomcraft.block.BlockRegistry;
 import com.enigtech.mooshroomcraft.block.BlockResourceMushroom;
+import com.enigtech.mooshroomcraft.tile.container.ContainerStewDistiller;
+import com.enigtech.mooshroomcraft.tile.container.ScreenStewDistiller;
 import net.minecraft.block.Block;
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.color.BlockColors;
@@ -18,6 +21,8 @@ import net.minecraftforge.fml.common.Mod;
 public class BlockRenderRegistry {
     @SubscribeEvent
     public static void onItemColorsInit(ColorHandlerEvent.Block event){
+
+
         BlockColors blockColors = event.getBlockColors();
         Block block = BlockRegistry.BLOCK_RESOURCE_MUSHROOM;
         RenderTypeLookup.setRenderLayer(block, RenderType.getCutoutMipped());
