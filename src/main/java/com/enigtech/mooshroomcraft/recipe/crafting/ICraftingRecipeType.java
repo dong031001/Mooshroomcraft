@@ -1,4 +1,4 @@
-package com.enigtech.mooshroomcraft.recipe;
+package com.enigtech.mooshroomcraft.recipe.crafting;
 
 import com.enigtech.mooshroomcraft.IConfigHandler;
 import com.enigtech.mooshroomcraft.item.ItemRegistry;
@@ -7,14 +7,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Tags;
 
-public enum RecipeType {
+public enum ICraftingRecipeType {
     RESOURCE_TO_MUSHROOM, MUSHROOM_TO_MOOSHER;
 
     public int toInt(){
         return this==RESOURCE_TO_MUSHROOM? 0:1;
     }
 
-    public static RecipeType fromInt(int i){
+    public static ICraftingRecipeType fromInt(int i){
         return i==0? RESOURCE_TO_MUSHROOM : MUSHROOM_TO_MOOSHER;
     }
 
@@ -59,7 +59,7 @@ public enum RecipeType {
 
         for(String resourceName : IConfigHandler.getResourceNames()){
             ItemStack itemStack = inventory.getStackInSlot(0);
-            if(itemStack.getChildTag("BlockEntityTag").getString("resource")==resourceName) return IConfigHandler.getMoosher(resourceName);
+            if(itemStack.getChildTag("BlockEntityTag").getString("resource").equals(resourceName)) return IConfigHandler.getMoosher(resourceName);
         }
         return null;
     }

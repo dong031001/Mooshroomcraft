@@ -1,6 +1,7 @@
 package com.enigtech.mooshroomcraft.recipe;
 
 import com.enigtech.mooshroomcraft.Mooshroomcraft;
+import com.enigtech.mooshroomcraft.recipe.crafting.IShapedRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

@@ -38,7 +38,7 @@ public class RendererResourceMooshroom extends MobRenderer<EntityResourceMooshro
         return new ResourceLocation("textures/entity/cow/brown_mooshroom.png");
     }
 
-    class ResourceMooshroomLayer<T extends EntityResourceMooshroom> extends MooshroomMushroomLayer<T>{
+    static class ResourceMooshroomLayer<T extends EntityResourceMooshroom> extends MooshroomMushroomLayer<T>{
         int color;
         public ResourceMooshroomLayer(IEntityRenderer rendererIn) {
             super(rendererIn);

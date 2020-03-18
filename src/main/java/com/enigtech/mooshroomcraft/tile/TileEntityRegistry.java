@@ -2,7 +2,6 @@ package com.enigtech.mooshroomcraft.tile;
 
 import com.enigtech.mooshroomcraft.Mooshroomcraft;
 import com.enigtech.mooshroomcraft.block.BlockResourceMushroom;
-import com.enigtech.mooshroomcraft.block.BlockStewDistiller;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

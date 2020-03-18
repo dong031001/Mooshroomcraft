@@ -1,20 +1,14 @@
-package com.enigtech.mooshroomcraft.recipe;
+package com.enigtech.mooshroomcraft.recipe.crafting;
 
-import com.enigtech.mooshroomcraft.item.ItemRegistry;
 import com.google.common.collect.Lists;
 import com.google.gson.JsonObject;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.tags.Tag;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.thread.EffectiveSide;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import net.minecraftforge.registries.ObjectHolder;
 
@@ -32,7 +26,7 @@ public class IShapedRecipeSerializer extends ForgeRegistryEntry<IRecipeSerialize
     @Override
     public IShapedRecipe read(ResourceLocation recipeId, JsonObject json) {
         String recipeType = JSONUtils.getString(json,"recipeType");
-        RecipeType parsedType = recipeType.equals("mushroom")? RecipeType.RESOURCE_TO_MUSHROOM  : recipeType.equals("moosher")? RecipeType.MUSHROOM_TO_MOOSHER : null;
+        ICraftingRecipeType parsedType = recipeType.equals("mushroom")? ICraftingRecipeType.RESOURCE_TO_MUSHROOM  : recipeType.equals("moosher")? ICraftingRecipeType.MUSHROOM_TO_MOOSHER : null;
         if(parsedType==null) throw new IllegalStateException("MOOSHROOMCRAFT RECIPE ILLEGAL");
 
         return new IShapedRecipe(parsedType, recipeId);
@@ -41,7 +35,7 @@ public class IShapedRecipeSerializer extends ForgeRegistryEntry<IRecipeSerialize
     @Nullable
     @Override
     public IShapedRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
-        return new IShapedRecipe(RecipeType.fromInt(buffer.readInt()), recipeId);
+        return new IShapedRecipe(ICraftingRecipeType.fromInt(buffer.readInt()), recipeId);
     }
 
     @Override

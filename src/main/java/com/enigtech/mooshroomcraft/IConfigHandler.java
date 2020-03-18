@@ -1,21 +1,17 @@
 package com.enigtech.mooshroomcraft;
 
 import com.enigtech.mooshroomcraft.entity.EntityResourceMooshroom;
-import com.enigtech.mooshroomcraft.item.ItemMoosher;
 import com.enigtech.mooshroomcraft.item.ItemRegistry;
-import com.enigtech.mooshroomcraft.item.ItemResourceMushroomStew;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import com.enigtech.mooshroomcraft.util.IOHandler;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.lwjgl.system.CallbackI;
 
 import java.io.File;
 import java.io.FileWriter;

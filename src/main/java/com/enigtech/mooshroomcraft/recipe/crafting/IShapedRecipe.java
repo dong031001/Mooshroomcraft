@@ -1,6 +1,7 @@
-package com.enigtech.mooshroomcraft.recipe;
+package com.enigtech.mooshroomcraft.recipe.crafting;
 
-import com.enigtech.mooshroomcraft.item.ItemRegistry;
+import com.enigtech.mooshroomcraft.recipe.crafting.ICraftingRecipeType;
+import com.enigtech.mooshroomcraft.recipe.crafting.IShapedRecipeSerializer;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ICraftingRecipe;
@@ -10,10 +11,10 @@ import net.minecraft.world.World;
 
 public class IShapedRecipe implements ICraftingRecipe {
 
-    RecipeType type;
+    ICraftingRecipeType type;
     ResourceLocation id;
 
-    public IShapedRecipe(RecipeType parsedType, ResourceLocation recipeId) {
+    public IShapedRecipe(ICraftingRecipeType parsedType, ResourceLocation recipeId) {
         this.type = parsedType;
         this.id = recipeId;
     }
@@ -25,19 +26,19 @@ public class IShapedRecipe implements ICraftingRecipe {
 
     @Override
     public boolean matches(CraftingInventory inv, World worldIn) {
-        if(type == RecipeType.RESOURCE_TO_MUSHROOM){
-            return RecipeType.getResourceRecipeOutput(inv) != null;
+        if(type == ICraftingRecipeType.RESOURCE_TO_MUSHROOM){
+            return ICraftingRecipeType.getResourceRecipeOutput(inv) != null;
         } else {
-            return RecipeType.getMoosherRecipeOutput(inv) != null;
+            return ICraftingRecipeType.getMoosherRecipeOutput(inv) != null;
         }
     }
 
     @Override
     public ItemStack getCraftingResult(CraftingInventory inv) {
-        if(type == RecipeType.MUSHROOM_TO_MOOSHER){
-            return RecipeType.getMoosherRecipeOutput(inv);
+        if(type == ICraftingRecipeType.MUSHROOM_TO_MOOSHER){
+            return ICraftingRecipeType.getMoosherRecipeOutput(inv);
         } else {
-            return RecipeType.getResourceRecipeOutput(inv);
+            return ICraftingRecipeType.getResourceRecipeOutput(inv);
         }
     }
 

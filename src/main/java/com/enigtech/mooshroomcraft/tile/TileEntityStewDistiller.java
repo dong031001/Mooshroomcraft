@@ -5,12 +5,10 @@ import com.enigtech.mooshroomcraft.Mooshroomcraft;
 import com.enigtech.mooshroomcraft.item.ItemRegistry;
 import com.enigtech.mooshroomcraft.tile.container.ContainerStewDistiller;
 import it.unimi.dsi.fastutil.objects.ObjectArrays;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -28,11 +26,9 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.registries.ObjectHolder;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.awt.*;
 
 public class TileEntityStewDistiller extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
