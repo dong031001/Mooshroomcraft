@@ -90,8 +90,9 @@ public class BlockStewDistiller extends Block {
             TileEntity tileEntity = worldIn.getTileEntity(pos);
             if(tileEntity instanceof INamedContainerProvider){
                 NetworkHooks.openGui((ServerPlayerEntity) player,(INamedContainerProvider) tileEntity, tileEntity.getPos());
+                return ActionResultType.SUCCESS;
             }
-            return ActionResultType.FAIL;
+            return ActionResultType.PASS;
         }
         return super.onBlockActivated(state, worldIn, pos, player, handIn, rayTraceResult);
     }

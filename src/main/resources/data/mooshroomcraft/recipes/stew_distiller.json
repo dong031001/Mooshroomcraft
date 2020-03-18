@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iRi",
+    "gDg",
+    "iOi"
+  ],
+  "key": {
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "R": {
+      "item": "minecraft:red_mushroom"
+    },
+    "g": {
+      "item": "minecraft:gold_ingot"
+    },
+    "D": {
+      "item": "minecraft:dropper"
+    },
+    "O": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "mooshroomcraft:stew_distiller",
+    "count": 1
+  }
+}
