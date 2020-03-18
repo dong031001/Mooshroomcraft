@@ -2,6 +2,7 @@ package com.enigtech.mooshroomcraft.entity;
 
 import com.enigtech.mooshroomcraft.item.ItemRegistry;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -10,9 +11,14 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class EntityResourceMooshroom extends MooshroomEntity {
 
@@ -94,5 +100,28 @@ public class EntityResourceMooshroom extends MooshroomEntity {
         super.tick();
     }
 
-
+    @Override
+    public List<ItemStack> onSheared(ItemStack item, IWorld world, BlockPos pos, int fortune) {
+        java.util.List<ItemStack> ret = new java.util.ArrayList<>();
+        this.world.addParticle(ParticleTypes.EXPLOSION, this.getPosX(), this.getPosYHeight(0.5D), this.getPosZ(), 0.0D, 0.0D, 0.0D);
+        if (!this.world.isRemote) {
+            this.remove();
+            CowEntity cowentity = EntityType.COW.create(this.world);
+            cowentity.setLocationAndAngles(this.getPosX(), this.getPosY(), this.getPosZ(), this.rotationYaw, this.rotationPitch);
+            cowentity.setHealth(this.getHealth());
+            cowentity.renderYawOffset = this.renderYawOffset;
+            if (this.hasCustomName()) {
+                cowentity.setCustomName(this.getCustomName());
+                cowentity.setCustomNameVisible(this.isCustomNameVisible());
+            }
+            this.world.addEntity(cowentity);
+            for(int i = 0; i < 5; ++i) {
+                ItemStack itemStack = new ItemStack(ItemRegistry.MUSHROOM);
+                itemStack.getOrCreateChildTag("BlockEntityTag").putString("resource", resource);
+                ret.add(itemStack);
+            }
+            this.playSound(SoundEvents.ENTITY_MOOSHROOM_SHEAR, 1.0F, 1.0F);
+        }
+        return ret;
+    }
 }

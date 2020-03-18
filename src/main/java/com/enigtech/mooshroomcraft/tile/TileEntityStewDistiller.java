@@ -288,10 +288,7 @@ public class TileEntityStewDistiller extends TileEntity implements ITickableTile
             return ItemStack.EMPTY;
         }
         //若物品相同，拥有相同标签或都没有标签进入处理阶段
-        System.out.println(stack+" ON PRE MERGE CHECK");
-        if(inSlot.getItem()==stack.getItem()
-                && (inSlot.hasTag() && stack.hasTag() && inSlot.getTag().equals(stack.getTag()) ||(!inSlot.hasTag()&&!stack.hasTag()))){
-            System.out.println("ON MERGE CHECK PASSED");
+        if(Container.areItemsAndTagsEqual(stack, inSlot)){
             int afterAmount = inSlot.getCount()+stack.getCount();
             //若数量相加大于最大数量，优先注满输出槽
             if(afterAmount > inSlot.getItem().getMaxStackSize()){

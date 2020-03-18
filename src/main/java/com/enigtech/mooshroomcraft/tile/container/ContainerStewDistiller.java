@@ -49,8 +49,8 @@ public class ContainerStewDistiller extends Container {
         this.playerInventory = new InvWrapper(playerInventory);
 
         tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP).ifPresent(handler -> addSlot(new SlotItemHandler(handler,0 ,56, 17)));
-        tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.DOWN).ifPresent(handler -> addSlot(new SlotItemHandler(handler,0 ,116, 35)));
         tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.WEST).ifPresent(handler -> addSlot(new SlotItemHandler(handler,0,56, 53)));
+        tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.DOWN).ifPresent(handler -> addSlot(new SlotItemHandler(handler,0 ,116, 35)));
         tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.SOUTH).ifPresent(handler -> addSlot(new SlotItemHandler(handler,0,143, 35)));
 
         layoutPlayerInventorySlots(8,84);
@@ -90,9 +90,9 @@ public class ContainerStewDistiller extends Container {
     @Override
     public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
         Slot slot = inventorySlots.get(index);
-
+        System.out.println(index);
         if (slot == null || !slot.getHasStack()) {
-            return null;
+            return ItemStack.EMPTY;
         }
 
         ItemStack newStack = slot.getStack(), oldStack = newStack.copy();
@@ -102,13 +102,13 @@ public class ContainerStewDistiller extends Container {
         if (index < 4) {
             isMerged = mergeItemStack(newStack, 4, 31, true);
         } else if (index < 31) {
-            isMerged = mergeItemStack(newStack, 0, 4, false) || mergeItemStack(newStack, 31, 40, false);
+            isMerged = mergeItemStack(newStack, 0, 2, false) || mergeItemStack(newStack, 31, 40, false);
         } else if (index < 40) {
-            isMerged = mergeItemStack(newStack, 0, 4, false) || mergeItemStack(newStack, 4, 31, false);
+            isMerged = mergeItemStack(newStack, 0, 2, false) || mergeItemStack(newStack, 4, 31, false);
         }
 
         if (!isMerged) {
-            return null;
+            return ItemStack.EMPTY;
         }
 
         if (newStack.getCount() == 0) {

@@ -155,14 +155,16 @@ public class IConfigHandler {
         return resourceMap.get(name).stewEffect;
     }
 
-    public static ItemMoosher getMoosher(String name){
-        if(resourceMap.get(name)==null) return null;
-        return resourceMap.get(name).moosher;
+    public static ItemStack getMoosher(String name){
+        ItemStack stack = new ItemStack(ItemRegistry.MOOSHER);
+        stack.getOrCreateTag().putString("resource", name);
+        return stack;
     }
 
-    public static Item getMushroom(String name){
-        if(resourceMap.get(name)==null) return null;
-        return resourceMap.get(name).mushroom;
+    public static ItemStack getMushroom(String name){
+        ItemStack stack = new ItemStack(ItemRegistry.MUSHROOM);
+        stack.getOrCreateChildTag("BlockEntityTag").putString("resource", name);
+        return stack;
     }
 
     public static Item getMushroomStew(String name){
@@ -215,6 +217,10 @@ public class IConfigHandler {
             return getResult(getNameFromItemStack(stack));
         }
         return null;
+    }
+
+    public static ItemStack getConstructor(String name){
+        return resourceMap.get(name).getConstructor();
     }
 
 }

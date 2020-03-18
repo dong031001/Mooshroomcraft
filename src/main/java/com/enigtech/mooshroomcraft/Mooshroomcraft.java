@@ -8,6 +8,7 @@ import com.enigtech.mooshroomcraft.render.ScreenRenderRegistry;
 import com.enigtech.mooshroomcraft.tile.container.ContainerStewDistiller;
 import com.enigtech.mooshroomcraft.tile.container.ScreenStewDistiller;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
@@ -34,6 +35,7 @@ public class Mooshroomcraft {
         new MooshroomcraftPacketHandler();
     }
     private void setup(final FMLCommonSetupEvent event){
+        //CraftingHelper.register(new RepairRecipeCondition.Serializer())
         proxy.setup(event);
     }
 }

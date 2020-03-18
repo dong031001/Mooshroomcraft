@@ -17,5 +17,6 @@
   "resource.mooshroomcraft.diamond" : "钻石",
   "resource.mooshroomcraft.lapis" : "青金石",
   "resource.mooshroomcraft.coal": "煤炭",
-  "resource.mooshroomcraft.quartz": "石英"
+  "resource.mooshroomcraft.quartz": "石英",
+  "resource.mooshroomcraft.redstone": "红石"
 }

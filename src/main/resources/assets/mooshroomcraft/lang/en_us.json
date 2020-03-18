@@ -16,5 +16,6 @@
     "resource.mooshroomcraft.iron" : "Iron",
     "resource.mooshroomcraft.gold" : "Gold",
     "resource.mooshroomcraft.diamond" : "Diamond",
-    "resource.mooshroomcraft.lapis" : "Lapis"
+    "resource.mooshroomcraft.lapis" : "Lapis",
+    "resource.mooshroomcraft.redstone": "Redstone"
 }
