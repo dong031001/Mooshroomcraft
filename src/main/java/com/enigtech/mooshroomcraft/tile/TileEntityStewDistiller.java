@@ -258,11 +258,7 @@ public class TileEntityStewDistiller extends TileEntity implements ITickableTile
         ItemStack inputInSlot = inputHandler.getStackInSlot(0);
         if(progress >= totalProgress){
             progress = 0;
-            System.out.println("ON PROCESS FINISHED");
-            System.out.println("BEFORE TRANSFER FROM "+inputInSlot+" TO "+outputHandler.getStackInSlot(0));
-            System.out.println("CASTED TO RESOURCE: TRANSFER FROM "+IConfigHandler.getResultFromStew(inputInSlot)+" TO "+outputHandler.getStackInSlot(0));
             addOrSetStackInHandler(outputHandler, IConfigHandler.getResultFromStew(inputInSlot), false);
-            System.out.println("AFTER TRANSFER: INPUT SLOT :"+inputInSlot+" OUTPUT SLOT :"+outputHandler.getStackInSlot(0));
             addOrSetStackInHandler(bowlHandler, new ItemStack(Items.BOWL), false);
 
             inputInSlot.shrink(1);
@@ -273,7 +269,6 @@ public class TileEntityStewDistiller extends TileEntity implements ITickableTile
     }
 
     private static ItemStack addOrSetStackInHandler(ItemStackHandler handler, ItemStack stack, boolean simulation){
-        if(!simulation) System.out.println("ON TRANSFERRING ITEM :"+stack+" TO "+handler.getStackInSlot(0));
 
         ItemStack inSlot = handler.getStackInSlot(0);
         //若输出槽已满，不做任何操作

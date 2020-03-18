@@ -6,7 +6,7 @@
     "item.mooshroomcraft.mooshroom_spawn_egg" : "Mooshroom Spawn Egg",
     "block.mooshroomcraft.stew_distiller": "Mushroom Stew Distiller",
     "gui.mooshroomcraft.stew_distiller": "Mushroom Stew Distiller",
-
+    "itemGroup.Mooshroomcraft": "Mooshroomcraft",
 
     "format.mooshroomcraft.moosher" : "%s Moosher",
     "format.mooshroomcraft.mushroom" : "%s Mushroom",
@@ -17,5 +17,7 @@
     "resource.mooshroomcraft.gold" : "Gold",
     "resource.mooshroomcraft.diamond" : "Diamond",
     "resource.mooshroomcraft.lapis" : "Lapis",
-    "resource.mooshroomcraft.redstone": "Redstone"
+    "resource.mooshroomcraft.redstone": "Redstone",
+    "resource.mooshroomcraft.coal": "Coal",
+    "resource.mooshroomcraft.quartz": "Quartz"
 }

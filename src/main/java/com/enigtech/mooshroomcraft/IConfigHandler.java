@@ -158,7 +158,7 @@ public class IConfigHandler {
     }
 
     public static ItemStack getMushroom(String name){
-        ItemStack stack = new ItemStack(ItemRegistry.MUSHROOM);
+        ItemStack stack = new ItemStack(ItemRegistry.MUSHROOM, 2);
         stack.getOrCreateChildTag("BlockEntityTag").putString("resource", name);
         return stack;
     }
