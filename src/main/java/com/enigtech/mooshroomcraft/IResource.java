@@ -25,6 +25,15 @@ public class IResource {
     ItemStack constructor;
     ItemStack result;
 
+    public ItemStack getConstructor() {
+        return constructor.copy();
+    }
+
+    public ItemStack getResult() {
+        return result.copy();
+    }
+
+
 
     public IResource(String resourceName, int color, String displayName, ArrayList<EffectInstance> stewEffects, ItemStack constructor, ItemStack result){
         this.displayName = displayName;
@@ -34,4 +43,6 @@ public class IResource {
         this.constructor = constructor;
         this.result = result;
     }
+
+
 }

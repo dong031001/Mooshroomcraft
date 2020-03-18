@@ -133,7 +133,6 @@ public class ContainerStewDistiller extends Container {
     public int getBurnLeftScaled() {
         float i = distillerData.get(TileEntityStewDistiller.INDEX_FUEL);
         float j = distillerData.get(TileEntityStewDistiller.INDEX_FUEL_TOTAL);
-        System.out.println("CLIENT SIDE: "+i+"/"+j);
         return j != 0 && i != 0 ? (int) (i * 13 / j) : 0;
     }
 

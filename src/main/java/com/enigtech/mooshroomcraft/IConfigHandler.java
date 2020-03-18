@@ -197,7 +197,6 @@ public class IConfigHandler {
     public static String getNameFromTag(CompoundNBT tag){
         if(tag.contains("resource")) return tag.getString("resource");
         if(tag.contains("BlockEntityTag")&&tag.getCompound("BlockEntityTag").contains("resource")) return tag.getCompound("BlockEntityTag").getString("resource");
-        System.out.println("GET NAME FROM TAG");
         return null;
     }
 
@@ -208,12 +207,13 @@ public class IConfigHandler {
             System.out.println("GET RESULT");
             return null;
         }
-        return resourceMap.get(name).result;
+        return resourceMap.get(name).getResult();
     }
 
     public static ItemStack getResultFromStew(ItemStack stack){
-        if(stack.getItem() == ItemRegistry.MUSHROOM_STEW) return getResult(getNameFromItemStack(stack));
-        System.out.println("GET RESULT FROM STEW");
+        if(stack.getItem() == ItemRegistry.MUSHROOM_STEW){
+            return getResult(getNameFromItemStack(stack));
+        }
         return null;
     }
 

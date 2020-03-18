@@ -28,9 +28,11 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.registries.ObjectHolder;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.awt.*;
 
 public class TileEntityStewDistiller extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
@@ -242,13 +244,14 @@ public class TileEntityStewDistiller extends TileEntity implements ITickableTile
         //若机器有剩余燃料时值且输入符合要求，开始处理原料
         if(fuel>0){
             fuel--;
-            if(inputInSlot.getCount()>0
+            if(inputInSlot.getItem()==Items.AIR||addOrSetStackInHandler(outputHandler, IConfigHandler.getResultFromStew(inputInSlot),true).getCount() == IConfigHandler.getResultFromStew(inputInSlot).getCount()){
+                progress = 0;
+            }else if(inputInSlot.getCount()>0
                     && inputInSlot.getItem()!=Items.AIR
                     && inputInSlot.hasTag()
                     && addOrSetStackInHandler(outputHandler, IConfigHandler.getResultFromStew(inputInSlot),true) != IConfigHandler.getResultFromStew(inputInSlot)){
+
                 progress++;
-            }else if(inputInSlot.getItem()==Items.AIR){
-                progress = 0;
             }
             return true;
         }
@@ -259,8 +262,11 @@ public class TileEntityStewDistiller extends TileEntity implements ITickableTile
         ItemStack inputInSlot = inputHandler.getStackInSlot(0);
         if(progress >= totalProgress){
             progress = 0;
-
+            System.out.println("ON PROCESS FINISHED");
+            System.out.println("BEFORE TRANSFER FROM "+inputInSlot+" TO "+outputHandler.getStackInSlot(0));
+            System.out.println("CASTED TO RESOURCE: TRANSFER FROM "+IConfigHandler.getResultFromStew(inputInSlot)+" TO "+outputHandler.getStackInSlot(0));
             addOrSetStackInHandler(outputHandler, IConfigHandler.getResultFromStew(inputInSlot), false);
+            System.out.println("AFTER TRANSFER: INPUT SLOT :"+inputInSlot+" OUTPUT SLOT :"+outputHandler.getStackInSlot(0));
             addOrSetStackInHandler(bowlHandler, new ItemStack(Items.BOWL), false);
 
             inputInSlot.shrink(1);
@@ -271,17 +277,21 @@ public class TileEntityStewDistiller extends TileEntity implements ITickableTile
     }
 
     private static ItemStack addOrSetStackInHandler(ItemStackHandler handler, ItemStack stack, boolean simulation){
+        if(!simulation) System.out.println("ON TRANSFERRING ITEM :"+stack+" TO "+handler.getStackInSlot(0));
+
         ItemStack inSlot = handler.getStackInSlot(0);
         //若输出槽已满，不做任何操作
         if(inSlot.getItem().getMaxStackSize()==inSlot.getCount()) return stack;
         //若输出槽没有物品，直接转移
-        if(inSlot.getItem()==Items.AIR||inSlot==ItemStack.EMPTY){
+        if(inSlot.isEmpty()||inSlot==ItemStack.EMPTY||inSlot.getCount()==0){
             if(!simulation) handler.setStackInSlot(0, stack);
             return ItemStack.EMPTY;
         }
         //若物品相同，拥有相同标签或都没有标签进入处理阶段
+        System.out.println(stack+" ON PRE MERGE CHECK");
         if(inSlot.getItem()==stack.getItem()
                 && (inSlot.hasTag() && stack.hasTag() && inSlot.getTag().equals(stack.getTag()) ||(!inSlot.hasTag()&&!stack.hasTag()))){
+            System.out.println("ON MERGE CHECK PASSED");
             int afterAmount = inSlot.getCount()+stack.getCount();
             //若数量相加大于最大数量，优先注满输出槽
             if(afterAmount > inSlot.getItem().getMaxStackSize()){
