@@ -12,6 +12,7 @@ import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -21,6 +22,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -218,18 +220,19 @@ public class TileEntityStewDistiller extends TileEntity implements ITickableTile
     @Override
     public void tick() {
         if(!world.isRemote){
-            if(fuelCheck()|progressCheck()|finishedCheck()) markDirty();
+            boolean isBurning = this.onBurn();
+            if(fuelCheck()|progressCheck()|finishedCheck()||burnStateChangedCheck(isBurning)) markDirty();
         }
     }
 
     private boolean fuelCheck(){
         ItemStack fuelInSlot = fuelHandler.getStackInSlot(0);
-        //如果有燃料且机器剩余燃烧时值为0，消耗燃料并填充到机器剩余燃烧时值中
         if(fuel == 0 && fuelInSlot.getCount() > 0 && fuelInSlot.getItem()!= Items.AIR && fuelInSlot!=ItemStack.EMPTY){
             lastFuel = ForgeHooks.getBurnTime(fuelInSlot) + 1;
             lastFuel--;
             fuel+=ForgeHooks.getBurnTime(fuelInSlot);
             fuelInSlot.shrink(1);
+
             return true;
         }
         return false;
@@ -237,7 +240,6 @@ public class TileEntityStewDistiller extends TileEntity implements ITickableTile
 
     private boolean progressCheck(){
         ItemStack inputInSlot = inputHandler.getStackInSlot(0);
-        //若机器有剩余燃料时值且输入符合要求，开始处理原料
         if(fuel>0){
             fuel--;
             if(inputInSlot.getItem()==Items.AIR||addOrSetStackInHandler(outputHandler, IConfigHandler.getResultFromStew(inputInSlot),true).getCount() == IConfigHandler.getResultFromStew(inputInSlot).getCount()){
@@ -268,20 +270,25 @@ public class TileEntityStewDistiller extends TileEntity implements ITickableTile
         return false;
     }
 
+    private boolean burnStateChangedCheck(boolean before){
+        boolean after = this.onBurn();
+        if(before!=after){
+            this.world.setBlockState(this.pos, this.world.getBlockState(pos).with(BlockStateProperties.LIT, after), Constants.BlockFlags.DEFAULT_AND_RERENDER);
+            return true;
+        }
+        return false;
+    }
+
     private static ItemStack addOrSetStackInHandler(ItemStackHandler handler, ItemStack stack, boolean simulation){
 
         ItemStack inSlot = handler.getStackInSlot(0);
-        //若输出槽已满，不做任何操作
         if(inSlot.getItem().getMaxStackSize()==inSlot.getCount()) return stack;
-        //若输出槽没有物品，直接转移
         if(inSlot.isEmpty()||inSlot==ItemStack.EMPTY||inSlot.getCount()==0){
             if(!simulation) handler.setStackInSlot(0, stack);
             return ItemStack.EMPTY;
         }
-        //若物品相同，拥有相同标签或都没有标签进入处理阶段
         if(Container.areItemsAndTagsEqual(stack, inSlot)){
             int afterAmount = inSlot.getCount()+stack.getCount();
-            //若数量相加大于最大数量，优先注满输出槽
             if(afterAmount > inSlot.getItem().getMaxStackSize()){
                 if(!simulation) inSlot.setCount(inSlot.getItem().getMaxStackSize());
                 stack.setCount(afterAmount-inSlot.getItem().getMaxStackSize());

@@ -1,7 +1,5 @@
 package com.enigtech.mooshroomcraft.recipe.crafting;
 
-import com.enigtech.mooshroomcraft.recipe.crafting.ICraftingRecipeType;
-import com.enigtech.mooshroomcraft.recipe.crafting.IShapedRecipeSerializer;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ICraftingRecipe;
@@ -9,13 +7,11 @@ import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class IShapedRecipe implements ICraftingRecipe {
+public class ShapedRecipeShell implements ICraftingRecipe {
 
-    ICraftingRecipeType type;
     ResourceLocation id;
 
-    public IShapedRecipe(ICraftingRecipeType parsedType, ResourceLocation recipeId) {
-        this.type = parsedType;
+    public ShapedRecipeShell(ResourceLocation recipeId) {
         this.id = recipeId;
     }
 
@@ -26,20 +22,18 @@ public class IShapedRecipe implements ICraftingRecipe {
 
     @Override
     public boolean matches(CraftingInventory inv, World worldIn) {
-        if(type == ICraftingRecipeType.RESOURCE_TO_MUSHROOM){
-            return ICraftingRecipeType.getResourceRecipeOutput(inv) != null;
-        } else {
-            return ICraftingRecipeType.getMoosherRecipeOutput(inv) != null;
+        for(RealShapedRecipe recipe : RealShapedRecipe.getRecipes()){
+            if(recipe.matches(inv, worldIn)) return true;
         }
+        return false;
     }
 
     @Override
     public ItemStack getCraftingResult(CraftingInventory inv) {
-        if(type == ICraftingRecipeType.MUSHROOM_TO_MOOSHER){
-            return ICraftingRecipeType.getMoosherRecipeOutput(inv);
-        } else {
-            return ICraftingRecipeType.getResourceRecipeOutput(inv);
+        for(RealShapedRecipe recipe : RealShapedRecipe.getRecipes()){
+            if(recipe.matches(inv)) return recipe.getCraftingResult(inv);
         }
+        return null;
     }
 
     @Override
@@ -59,6 +53,6 @@ public class IShapedRecipe implements ICraftingRecipe {
 
     @Override
     public IRecipeSerializer<?> getSerializer() {
-        return IShapedRecipeSerializer.SERIALIZER;
+        return ShapedRecipeShellSerializer.SERIALIZER;
     }
 }

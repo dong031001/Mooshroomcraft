@@ -42,7 +42,6 @@ public class ItemResourceMushroomStew extends Item {
     @Override
     public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
         if (this.isInGroup(group)) {
-            items.add(new ItemStack(this));
             for(String name : IConfigHandler.getResourceNames()){
                 ItemStack itemStack = new ItemStack(this);
                 itemStack.setTag(new CompoundNBT());

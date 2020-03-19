@@ -1,6 +1,9 @@
 package com.enigtech.mooshroomcraft.entity;
 
+import com.enigtech.mooshroomcraft.IConfigHandler;
+import com.enigtech.mooshroomcraft.Mooshroomcraft;
 import com.enigtech.mooshroomcraft.item.ItemRegistry;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.MooshroomEntity;
@@ -15,6 +18,8 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
@@ -103,7 +108,7 @@ public class EntityResourceMooshroom extends MooshroomEntity {
     @Override
     public List<ItemStack> onSheared(ItemStack item, IWorld world, BlockPos pos, int fortune) {
         java.util.List<ItemStack> ret = new java.util.ArrayList<>();
-        this.world.addParticle(ParticleTypes.EXPLOSION, this.getPosX(), this.getPosYHeight(0.5D), this.getPosZ(), 0.0D, 0.0D, 0.0D);
+        this.world.addParticle(ParticleTypes.EXPLOSION, this.getPosX(), this.func_226283_e_ (0.5D), this.getPosZ(), 0.0D, 0.0D, 0.0D);
         if (!this.world.isRemote) {
             this.remove();
             CowEntity cowentity = EntityType.COW.create(this.world);
@@ -123,5 +128,15 @@ public class EntityResourceMooshroom extends MooshroomEntity {
             this.playSound(SoundEvents.ENTITY_MOOSHROOM_SHEAR, 1.0F, 1.0F);
         }
         return ret;
+    }
+
+    protected ITextComponent func_225513_by_() {
+        if(this.resource!=null){
+            String name = IConfigHandler.getDisplayName(resource)!=null?
+                            IConfigHandler.getDisplayName(resource)
+                            : I18n.format("resource." + Mooshroomcraft.MOD_ID + "." + resource);
+            return new StringTextComponent(I18n.format("format."+Mooshroomcraft.MOD_ID+".mooshroom", name));
+        }
+        return this.getType().getName();
     }
 }

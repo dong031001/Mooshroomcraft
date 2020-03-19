@@ -7,11 +7,13 @@
     "block.mooshroomcraft.stew_distiller": "Mushroom Stew Distiller",
     "gui.mooshroomcraft.stew_distiller": "Mushroom Stew Distiller",
     "itemGroup.Mooshroomcraft": "Mooshroomcraft",
+    "entity.mooshroomcraft.mooshroom": "Mooshroom",
 
     "format.mooshroomcraft.moosher" : "%s Moosher",
     "format.mooshroomcraft.mushroom" : "%s Mushroom",
     "format.mooshroomcraft.mushroom_stew" : "%s Mushroom Stew",
     "format.mooshroomcraft.mooshroom_spawn_egg" : "%s Mooshroom Spawn Egg",
+    "format.mooshroomcraft.mooshroom": "%s Mooshroom",
 
     "resource.mooshroomcraft.iron" : "Iron",
     "resource.mooshroomcraft.gold" : "Gold",

@@ -7,11 +7,14 @@
   "block.mooshroomcraft.stew_distiller": "蘑菇煲蒸馏器",
   "gui.mooshroomcraft.stew_distiller": "蘑菇煲蒸馏器",
   "itemGroup.Mooshroomcraft": "哞菇工艺",
+  "entity.mooshroomcraft.mooshroom": "哞菇",
+
 
   "format.mooshroomcraft.moosher" : "%s哞哞粉",
   "format.mooshroomcraft.mushroom" : "%s蘑菇",
   "format.mooshroomcraft.mushroom_stew" : "%s蘑菇煲",
   "format.mooshroomcraft.mooshroom_spawn_egg" : "%s哞菇刷怪蛋",
+  "format.mooshroomcraft.mooshroom": "%s哞菇",
 
   "resource.mooshroomcraft.iron" : "铁",
   "resource.mooshroomcraft.gold" : "金",

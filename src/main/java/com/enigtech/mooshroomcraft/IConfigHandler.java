@@ -163,11 +163,6 @@ public class IConfigHandler {
         return stack;
     }
 
-    public static Item getMushroomStew(String name){
-        if(resourceMap.get(name)==null) return null;
-        return resourceMap.get(name).mushroomStew;
-    }
-
     public static EntityType<EntityResourceMooshroom> getMooshroom(String name){
         if(resourceMap.get(name)==null) return null;
         return resourceMap.get(name).mooshroomEntityType;
