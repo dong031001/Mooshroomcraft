@@ -146,6 +146,14 @@ jar {
     }
 }
 
+task zip(type: Zip,dependsOn:jar) {
+    from 'build/libs'
+    include '*'
+    include '*/*' //to include contents of a folder present inside Reports directory
+    destinationDir file('artifacts')
+    archiveName 'Mooshroomcraft.zip'
+}
+
 // Example configuration to allow publishing using the maven-publish task
 // we define a custom artifact that is sourced from the reobfJar output task
 // and then declare that to be published
