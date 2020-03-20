@@ -51,10 +51,10 @@ public class RendererResourceMooshroom extends MobRenderer<EntityResourceMooshro
 
                 color = IConfigHandler.getColor(entityLivingBaseIn.getDataManager().get(EntityResourceMooshroom.TYPE));
 
-                int i = LivingRenderer.func_229117_c_ (entityLivingBaseIn, 0.0F);
+                int i = LivingRenderer.getPackedOverlay(entityLivingBaseIn, 0.0F);
                 matrixStackIn.push();
                 matrixStackIn.translate(0.2F, -0.35F, 0.5D);
-                matrixStackIn.rotate(Vector3f.field_229181_d_ .func_229187_a_(-48.0F));
+                matrixStackIn.rotate(Vector3f.YP.rotationDegrees(-48.0F));
                 matrixStackIn.scale(-1.0F, -1.0F, 1.0F);
                 matrixStackIn.translate(-0.5D, -0.5D, -0.5D);
                 renderMushroom(blockrendererdispatcher,blockstate, matrixStackIn, bufferIn, packedLightIn, i, net.minecraftforge.client.model.data.EmptyModelData.INSTANCE);
@@ -62,17 +62,17 @@ public class RendererResourceMooshroom extends MobRenderer<EntityResourceMooshro
                 matrixStackIn.pop();
                 matrixStackIn.push();
                 matrixStackIn.translate(0.2F, -0.35F, 0.5D);
-                matrixStackIn.rotate(Vector3f.field_229181_d_ .func_229187_a_(42.0F));
+                matrixStackIn.rotate(Vector3f.YP.rotationDegrees(42.0F));
                 matrixStackIn.translate(0.1F, 0.0D, -0.6F);
-                matrixStackIn.rotate(Vector3f.field_229181_d_ .func_229187_a_(-48.0F));
+                matrixStackIn.rotate(Vector3f.YP.rotationDegrees(-48.0F));
                 matrixStackIn.scale(-1.0F, -1.0F, 1.0F);
                 matrixStackIn.translate(-0.5D, -0.5D, -0.5D);
                 renderMushroom(blockrendererdispatcher,blockstate, matrixStackIn, bufferIn, packedLightIn, i, net.minecraftforge.client.model.data.EmptyModelData.INSTANCE);
                 matrixStackIn.pop();
                 matrixStackIn.push();
-                this.getEntityModel().getHead().setAnglesAndRotation(matrixStackIn);
+                this.getEntityModel().getHead().translateRotate(matrixStackIn);
                 matrixStackIn.translate(0.0D, -0.7F, -0.2F);
-                matrixStackIn.rotate(Vector3f.field_229181_d_.func_229187_a_(-78.0F));
+                matrixStackIn.rotate(Vector3f.YP.rotationDegrees(-78.0F));
                 matrixStackIn.scale(-1.0F, -1.0F, 1.0F);
                 matrixStackIn.translate(-0.5D, -0.5D, -0.5D);
                 renderMushroom(blockrendererdispatcher,blockstate, matrixStackIn, bufferIn, packedLightIn, i, net.minecraftforge.client.model.data.EmptyModelData.INSTANCE);
@@ -86,7 +86,7 @@ public class RendererResourceMooshroom extends MobRenderer<EntityResourceMooshro
             float f = (float)(i >> 16 & 255) / 255.0F;
             float f1 = (float)(i >> 8 & 255) / 255.0F;
             float f2 = (float)(i & 255) / 255.0F;
-            renderModel(matrixStackIn.getLast(), bufferTypeIn.getBuffer(RenderTypeLookup.func_228394_b_(blockStateIn)), blockStateIn, ibakedmodel, f, f1, f2, combinedLightIn, combinedOverlayIn, modelData);
+            renderModel(matrixStackIn.getLast(), bufferTypeIn.getBuffer(RenderTypeLookup.getRenderType(blockStateIn)), blockStateIn, ibakedmodel, f, f1, f2, combinedLightIn, combinedOverlayIn, modelData);
         }
 
         private void renderModel(MatrixStack.Entry matrixEntry, IVertexBuilder buffer, @Nullable BlockState state, IBakedModel modelIn, float red, float green, float blue, int combinedLightIn, int combinedOverlayIn, net.minecraftforge.client.model.data.IModelData modelData){
@@ -106,7 +106,7 @@ public class RendererResourceMooshroom extends MobRenderer<EntityResourceMooshro
                     f1 = 1.0F;
                     f2 = 1.0F;
                 }
-                buffer.addVertexData(matrixEntry, bakedquad, f, f1, f2, combinedLightIn, combinedOverlayIn);
+                buffer.addQuad(matrixEntry, bakedquad, f, f1, f2, combinedLightIn, combinedOverlayIn);
             }
         }
     }
