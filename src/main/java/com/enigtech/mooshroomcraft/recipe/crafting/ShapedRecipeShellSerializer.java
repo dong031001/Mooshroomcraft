@@ -18,7 +18,7 @@ import java.util.List;
 public class ShapedRecipeShellSerializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<ShapedRecipeShell> {
 
     @ObjectHolder("mooshroomcraft:mooshroomcraft_recipe")
-        public static final IRecipeSerializer<?> SERIALIZER = null;
+    public static final IRecipeSerializer<?> SERIALIZER = null;
 
 
     @Override
