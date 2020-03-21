@@ -94,7 +94,7 @@ public class BlockStewDistiller extends Block {
             }
             return ActionResultType.PASS;
         }
-        return super.onBlockActivated(state, worldIn, pos, player, handIn, rayTraceResult);
+        return ActionResultType.SUCCESS;
     }
 
     @OnlyIn(Dist.CLIENT)

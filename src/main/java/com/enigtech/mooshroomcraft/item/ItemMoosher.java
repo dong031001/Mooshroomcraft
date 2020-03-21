@@ -37,7 +37,7 @@ public class ItemMoosher extends ColoredItem {
         if(target instanceof CowEntity &&!(target instanceof MooshroomEntity)&&(!playerIn.world.isRemote)){
             if(!target.isChild()){
                 MooshroomEntity mooshroom;
-                if(!stack.hasTag()) mooshroom = EntityType.MOOSHROOM.create(playerIn.world);
+                if(!stack.hasTag()) mooshroom = EntityRegistry.MOOSHROOM_WRAPPER_ENTITY_TYPE.create(playerIn.world);
                 else mooshroom = EntityRegistry.RESOURCE_MOOSHROOM_ENTITY_TYPE.create(playerIn.world);
                 CompoundNBT tag = new CompoundNBT();
                 tag.putString("resource", stack.getOrCreateTag().getString("resource"));

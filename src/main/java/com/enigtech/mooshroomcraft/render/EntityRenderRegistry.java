@@ -3,6 +3,7 @@ package com.enigtech.mooshroomcraft.render;
 import com.enigtech.mooshroomcraft.Mooshroomcraft;
 import com.enigtech.mooshroomcraft.entity.EntityRegistry;
 import com.enigtech.mooshroomcraft.render.entity.RenderFactoryResourceMooshroom;
+import net.minecraft.client.renderer.entity.MooshroomRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -17,5 +18,6 @@ public class EntityRenderRegistry {
     @OnlyIn(Dist.CLIENT)
     public static void clientInit(ModelRegistryEvent event) {
         RenderingRegistry.registerEntityRenderingHandler(EntityRegistry.RESOURCE_MOOSHROOM_ENTITY_TYPE, new RenderFactoryResourceMooshroom());
+        RenderingRegistry.registerEntityRenderingHandler(EntityRegistry.MOOSHROOM_WRAPPER_ENTITY_TYPE, MooshroomRenderer::new);
     }
 }
