@@ -2,7 +2,6 @@ package com.enigtech.mooshroomcraft.recipe.distiller;
 
 import com.enigtech.mooshroomcraft.Mooshroomcraft;
 import com.enigtech.mooshroomcraft.item.ItemRegistry;
-import com.enigtech.mooshroomcraft.item.ItemResourceMushroomStew;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -16,7 +15,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
-import org.jline.builtins.Source;
 
 import java.util.ArrayList;
 

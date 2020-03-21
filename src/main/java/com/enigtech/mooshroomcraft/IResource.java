@@ -6,7 +6,6 @@ import com.enigtech.mooshroomcraft.recipe.crafting.RealShapedRecipe;
 import com.enigtech.mooshroomcraft.recipe.distiller.DistillerRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.EffectInstance;

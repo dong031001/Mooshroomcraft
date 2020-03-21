@@ -4,7 +4,6 @@ import com.enigtech.mooshroomcraft.IConfigHandler;
 import com.enigtech.mooshroomcraft.Mooshroomcraft;
 import com.enigtech.mooshroomcraft.item.ItemRegistry;
 import com.enigtech.mooshroomcraft.recipe.crafting.RealShapedRecipe;
-import com.enigtech.mooshroomcraft.recipe.crafting.ShapedRecipeShell;
 import com.enigtech.mooshroomcraft.recipe.distiller.DistillerRecipe;
 import com.enigtech.mooshroomcraft.recipe.distiller.DistillerRecipeCategory;
 import mezz.jei.api.IModPlugin;
@@ -21,7 +20,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ICraftingRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.Tags;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -86,11 +84,7 @@ public class JEIPlugin implements IModPlugin {
         public void setIngredients(IIngredients ingredients) {
             List<Ingredient> inputs = new ArrayList<>();
             Ingredient[][] grid = recipe.getRecipe();
-            for(int i = 0; i < 3; i++){
-                for(int j = 0; j < 3; j++){
-                    inputs.add(grid[i][j]);
-                }
-            }
+            for(int i = 0; i < 3; i++) inputs.addAll(Arrays.asList(grid[i]).subList(0, 3));
             ingredients.setInputIngredients(inputs);
             ingredients.setOutput(VanillaTypes.ITEM, recipe.getRecipeOutput());
         }

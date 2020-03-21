@@ -4,7 +4,6 @@ import com.enigtech.mooshroomcraft.entity.EntityResourceMooshroom;
 import com.enigtech.mooshroomcraft.item.ItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
-import net.minecraft.item.Item;
 import com.enigtech.mooshroomcraft.util.IOHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
