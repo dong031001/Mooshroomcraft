@@ -6,6 +6,7 @@
   "item.mooshroomcraft.mooshroom_spawn_egg" : "哞菇刷怪蛋",
   "block.mooshroomcraft.stew_distiller": "蘑菇煲蒸馏器",
   "gui.mooshroomcraft.stew_distiller": "蘑菇煲蒸馏器",
+  "category.mooshroomcraft.distiller_recipe": "蘑菇煲蒸馏器",
   "itemGroup.Mooshroomcraft": "哞菇工艺",
   "entity.mooshroomcraft.mooshroom": "哞菇",
 

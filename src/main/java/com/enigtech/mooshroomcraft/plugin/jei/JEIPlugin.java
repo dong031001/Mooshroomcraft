@@ -3,20 +3,20 @@ package com.enigtech.mooshroomcraft.plugin.jei;
 import com.enigtech.mooshroomcraft.IConfigHandler;
 import com.enigtech.mooshroomcraft.Mooshroomcraft;
 import com.enigtech.mooshroomcraft.item.ItemRegistry;
-import com.enigtech.mooshroomcraft.recipe.crafting.ICraftingRecipeType;
 import com.enigtech.mooshroomcraft.recipe.crafting.RealShapedRecipe;
 import com.enigtech.mooshroomcraft.recipe.crafting.ShapedRecipeShell;
+import com.enigtech.mooshroomcraft.recipe.distiller.DistillerRecipe;
+import com.enigtech.mooshroomcraft.recipe.distiller.DistillerRecipeCategory;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaRecipeCategoryUid;
 import mezz.jei.api.constants.VanillaTypes;
+import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.subtypes.ISubtypeInterpreter;
 import mezz.jei.api.recipe.category.extensions.IExtendableRecipeCategory;
 import mezz.jei.api.recipe.category.extensions.vanilla.crafting.ICraftingCategoryExtension;
-import mezz.jei.api.registration.IRecipeRegistration;
-import mezz.jei.api.registration.ISubtypeRegistration;
-import mezz.jei.api.registration.IVanillaCategoryExtensionRegistration;
+import mezz.jei.api.registration.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ICraftingRecipe;
 import net.minecraft.item.crafting.Ingredient;
@@ -47,6 +47,7 @@ public class JEIPlugin implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         registration.addRecipes(RealShapedRecipe.getRecipes(), VanillaRecipeCategoryUid.CRAFTING);
+        registration.addRecipes(DistillerRecipe.getRecipeManager(), DistillerRecipeCategory.UID);
     }
 
     @Override
@@ -56,7 +57,16 @@ public class JEIPlugin implements IModPlugin {
 
     }
 
+    @Override
+    public void registerCategories(IRecipeCategoryRegistration registration) {
+        IGuiHelper helper = registration.getJeiHelpers().getGuiHelper();
+        registration.addRecipeCategories(new DistillerRecipeCategory(helper));
+    }
 
+    @Override
+    public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+        registration.addRecipeCatalyst(new ItemStack(ItemRegistry.ITEM_STEW_DISTILLER), DistillerRecipeCategory.UID);
+    }
 
     private static class SubTypeInterpreter implements ISubtypeInterpreter{
         @Override
