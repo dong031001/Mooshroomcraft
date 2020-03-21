@@ -221,7 +221,7 @@ public class TileEntityStewDistiller extends TileEntity implements ITickableTile
     public void tick() {
         if(!world.isRemote){
             boolean isBurning = this.onBurn();
-            if(fuelCheck()|progressCheck()|finishedCheck()||burnStateChangedCheck(isBurning)) markDirty();
+            if(fuelCheck()|progressCheck()|finishedCheck()|burnStateChangedCheck(isBurning)) markDirty();
         }
     }
 
