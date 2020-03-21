@@ -3,6 +3,7 @@ package com.enigtech.mooshroomcraft;
 import com.enigtech.mooshroomcraft.entity.EntityResourceMooshroom;
 import com.enigtech.mooshroomcraft.item.*;
 import com.enigtech.mooshroomcraft.recipe.crafting.RealShapedRecipe;
+import com.enigtech.mooshroomcraft.recipe.distiller.DistillerRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
@@ -82,6 +83,8 @@ public class IResource {
                 new Ingredient[]{Ingredient.fromStacks(getMushroom()), Ingredient.fromTag(Tags.Items.MUSHROOMS), Ingredient.fromStacks(getMushroom())}
         };
         RealShapedRecipe.register(new RealShapedRecipe(moosherRecipe, getMoosher(), new ResourceLocation(Mooshroomcraft.MOD_ID, name+"_moosher")));
+        System.out.println(getMushroomStew()+"->"+getResult());
+        DistillerRecipe.register(new DistillerRecipe(getMushroomStew(), getResult(), name, name+"_distiller_recipe"));
     }
 
 

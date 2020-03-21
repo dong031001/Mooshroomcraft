@@ -6,6 +6,7 @@
     "item.mooshroomcraft.mooshroom_spawn_egg" : "Mooshroom Spawn Egg",
     "block.mooshroomcraft.stew_distiller": "Mushroom Stew Distiller",
     "gui.mooshroomcraft.stew_distiller": "Mushroom Stew Distiller",
+    "category.mooshroomcraft.distiller_recipe": "Mushroom Stew Distiller",
     "itemGroup.Mooshroomcraft": "Mooshroomcraft",
     "entity.mooshroomcraft.mooshroom": "Mooshroom",
 
