@@ -6,6 +6,8 @@ import com.enigtech.mooshroomcraft.item.ItemRegistry;
 import com.enigtech.mooshroomcraft.recipe.crafting.RealShapedRecipe;
 import com.enigtech.mooshroomcraft.recipe.distiller.DistillerRecipe;
 import com.enigtech.mooshroomcraft.recipe.distiller.DistillerRecipeCategory;
+import com.enigtech.mooshroomcraft.recipe.milking.MilkingRecipe;
+import com.enigtech.mooshroomcraft.recipe.milking.MilkingRecipeCategory;
 import com.enigtech.mooshroomcraft.tile.container.ContainerStewDistiller;
 import com.enigtech.mooshroomcraft.tile.container.ScreenStewDistiller;
 import mezz.jei.api.IModPlugin;
@@ -18,7 +20,9 @@ import mezz.jei.api.ingredients.subtypes.ISubtypeInterpreter;
 import mezz.jei.api.recipe.category.extensions.IExtendableRecipeCategory;
 import mezz.jei.api.recipe.category.extensions.vanilla.crafting.ICraftingCategoryExtension;
 import mezz.jei.api.registration.*;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.item.crafting.ICraftingRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
@@ -47,25 +51,27 @@ public class JEIPlugin implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         registration.addRecipes(RealShapedRecipe.getRecipes(), VanillaRecipeCategoryUid.CRAFTING);
-        registration.addRecipes(DistillerRecipe.getRecipeManager(), DistillerRecipeCategory.UID);
+        registration.addRecipes(DistillerRecipe.getRecipes(), DistillerRecipeCategory.UID);
+        registration.addRecipes(MilkingRecipe.getRecipes(), MilkingRecipeCategory.UID);
     }
 
     @Override
     public void registerVanillaCategoryExtensions(IVanillaCategoryExtensionRegistration registration) {
         IExtendableRecipeCategory<ICraftingRecipe, ICraftingCategoryExtension> craftingCategory = registration.getCraftingCategory();
         craftingCategory.addCategoryExtension(RealShapedRecipe.class, RealShapedRecipeWrapper::new);
-
     }
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         IGuiHelper helper = registration.getJeiHelpers().getGuiHelper();
         registration.addRecipeCategories(new DistillerRecipeCategory(helper));
+        registration.addRecipeCategories(new MilkingRecipeCategory(helper));
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(ItemRegistry.ITEM_STEW_DISTILLER), DistillerRecipeCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(SpawnEggItem.getEgg(EntityType.COW)), MilkingRecipeCategory.UID);
     }
 
     @Override

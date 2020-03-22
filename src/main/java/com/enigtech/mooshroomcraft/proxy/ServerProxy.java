@@ -1,5 +1,6 @@
 package com.enigtech.mooshroomcraft.proxy;
 
+import com.enigtech.mooshroomcraft.recipe.milking.MilkingRecipe;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;

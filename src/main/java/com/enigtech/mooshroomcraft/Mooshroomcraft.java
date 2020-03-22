@@ -3,6 +3,7 @@ package com.enigtech.mooshroomcraft;
 import com.enigtech.mooshroomcraft.proxy.ClientProxy;
 import com.enigtech.mooshroomcraft.proxy.IProxy;
 import com.enigtech.mooshroomcraft.proxy.ServerProxy;
+import com.enigtech.mooshroomcraft.recipe.milking.MilkingRecipe;
 import com.enigtech.mooshroomcraft.render.EntityRenderRegistry;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -28,9 +29,9 @@ public class Mooshroomcraft {
         eventBus.addListener(EntityRenderRegistry::clientInit);
         eventBus.addListener(this::setup);
         new MooshroomcraftPacketHandler();
+        MilkingRecipe.registerVanillaMilkingRecipes();
     }
     private void setup(final FMLCommonSetupEvent event){
-        //CraftingHelper.register(new RepairRecipeCondition.Serializer())
         proxy.setup(event);
     }
 }

@@ -42,7 +42,7 @@ public class DistillerRecipe {
         recipes.add(recipe);
     }
 
-    public static ArrayList<DistillerRecipe> getRecipeManager(){
+    public static ArrayList<DistillerRecipe> getRecipes(){
         return recipes;
     }
 }

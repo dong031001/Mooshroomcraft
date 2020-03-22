@@ -4,9 +4,11 @@ import com.enigtech.mooshroomcraft.entity.EntityResourceMooshroom;
 import com.enigtech.mooshroomcraft.item.*;
 import com.enigtech.mooshroomcraft.recipe.crafting.RealShapedRecipe;
 import com.enigtech.mooshroomcraft.recipe.distiller.DistillerRecipe;
+import com.enigtech.mooshroomcraft.recipe.milking.MilkingRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ResourceLocation;
@@ -84,6 +86,7 @@ public class IResource {
         RealShapedRecipe.register(new RealShapedRecipe(moosherRecipe, getMoosher(), new ResourceLocation(Mooshroomcraft.MOD_ID, name+"_moosher")));
         System.out.println(getMushroomStew()+"->"+getResult());
         DistillerRecipe.register(new DistillerRecipe(getMushroomStew(), getResult(), name, name+"_distiller_recipe"));
+        MilkingRecipe.register(new MilkingRecipe(getMoosher(), new ItemStack(Items.BOWL), getMushroomStew(), name, name+"milking_recipe", true));
     }
 
 
