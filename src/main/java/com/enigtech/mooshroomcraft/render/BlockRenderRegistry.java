@@ -22,7 +22,7 @@ public class BlockRenderRegistry {
 
         BlockColors blockColors = event.getBlockColors();
         Block block = BlockRegistry.BLOCK_RESOURCE_MUSHROOM;
-        RenderTypeLookup.setRenderLayer(block, RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(block, RenderType.getCutoutMipped());
         blockColors.register((state, light, pos, layer)->{
             if(layer==0) return -1;
             //indicate("ON RENDERING");

@@ -108,7 +108,7 @@ public class EntityResourceMooshroom extends MooshroomEntity {
     @Override
     public List<ItemStack> onSheared(ItemStack item, IWorld world, BlockPos pos, int fortune) {
         java.util.List<ItemStack> ret = new java.util.ArrayList<>();
-        this.world.addParticle(ParticleTypes.EXPLOSION, this.getPosX(), this.func_226283_e_ (0.5D), this.getPosZ(), 0.0D, 0.0D, 0.0D);
+        this.world.addParticle(ParticleTypes.EXPLOSION, this.getPosX(), this.getPosYHeight(0.5D), this.getPosZ(), 0.0D, 0.0D, 0.0D);
         if (!this.world.isRemote) {
             this.remove();
             CowEntity cowentity = EntityType.COW.create(this.world);
