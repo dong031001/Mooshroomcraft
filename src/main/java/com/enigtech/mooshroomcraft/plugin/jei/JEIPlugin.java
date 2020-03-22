@@ -6,6 +6,8 @@ import com.enigtech.mooshroomcraft.item.ItemRegistry;
 import com.enigtech.mooshroomcraft.recipe.crafting.RealShapedRecipe;
 import com.enigtech.mooshroomcraft.recipe.distiller.DistillerRecipe;
 import com.enigtech.mooshroomcraft.recipe.distiller.DistillerRecipeCategory;
+import com.enigtech.mooshroomcraft.tile.container.ContainerStewDistiller;
+import com.enigtech.mooshroomcraft.tile.container.ScreenStewDistiller;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaRecipeCategoryUid;
@@ -64,6 +66,17 @@ public class JEIPlugin implements IModPlugin {
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(ItemRegistry.ITEM_STEW_DISTILLER), DistillerRecipeCategory.UID);
+    }
+
+    @Override
+    public void registerGuiHandlers(IGuiHandlerRegistration registration) {
+        registration.addRecipeClickArea(ScreenStewDistiller.class, 78,32,28,23, DistillerRecipeCategory.UID, VanillaRecipeCategoryUid.FUEL);
+    }
+
+    @Override
+    public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
+        registration.addRecipeTransferHandler(ContainerStewDistiller.class, DistillerRecipeCategory.UID, 0, 1, 4, 36);
+        registration.addRecipeTransferHandler(ContainerStewDistiller.class, VanillaRecipeCategoryUid.FUEL, 1,1, 4,36);
     }
 
     private static class SubTypeInterpreter implements ISubtypeInterpreter{
